@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
@@ -7,14 +8,21 @@ namespace EkwClicker
 {
 	internal class SeleniumClicker : IClicker
 	{
-		private readonly ChromeDriver _driver;
+		private readonly ChromeDriver _driver = new ChromeDriver();
 
-		public SeleniumClicker(string url)
+		public string StartingUrl { get; set; }
+
+		public void GotoHome()
 		{
-			_driver = new ChromeDriver();
-			_driver.Navigate().GoToUrl(url);
+			if (string.IsNullOrEmpty(StartingUrl))
+			{
+				throw new NullReferenceException(
+					$"property {nameof(StartingUrl)} cannot be null");
+			}
+			
+			_driver.Navigate().GoToUrl(StartingUrl);
 		}
-
+		
 		public void FillTextbox(string textboxId, string text)
 		{
 			_driver
