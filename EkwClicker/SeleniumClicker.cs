@@ -9,18 +9,22 @@ namespace EkwClicker
 	internal class SeleniumClicker : IClicker
 	{
 		private readonly ChromeDriver _driver = new ChromeDriver();
+		private readonly string _homeUrl;
 
-		public string StartingUrl { get; set; }
+		public SeleniumClicker(string homeUrl)
+		{
+			_homeUrl = homeUrl;
+		}
 
 		public void GotoHome()
 		{
-			if (string.IsNullOrEmpty(StartingUrl))
+			if (string.IsNullOrEmpty(_homeUrl))
 			{
 				throw new NullReferenceException(
-					$"property {nameof(StartingUrl)} cannot be null");
+					$"property {nameof(_homeUrl)} cannot be null");
 			}
 			
-			_driver.Navigate().GoToUrl(StartingUrl);
+			_driver.Navigate().GoToUrl(_homeUrl);
 		}
 		
 		public void FillTextbox(string textboxId, string text)
@@ -83,10 +87,10 @@ namespace EkwClicker
 			return errorsElements.Count > 0;
 		}
 
-		public void CloseCookiesInfo(string xPath)
+		public void CloseCookiesInfo()
 		{
 			_driver
-				.FindElement(By.XPath(xPath))
+				.FindElement(By.XPath("//*[@id=\"cookies\"]/div/span/span"))
 				.Click();
 		}
 
