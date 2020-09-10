@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 
 namespace EkwClicker
 {
-	internal class SeleniumClicker : IDisposable
+	internal class SeleniumClicker : IClicker
 	{
 		private readonly ChromeDriver _driver;
 
@@ -76,7 +75,7 @@ namespace EkwClicker
 			return errorsElements.Count > 0;
 		}
 
-		internal void CloseCookiesInfo(string xPath)
+		public void CloseCookiesInfo(string xPath)
 		{
 			_driver
 				.FindElement(By.XPath(xPath))
