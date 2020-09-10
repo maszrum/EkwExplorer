@@ -31,10 +31,24 @@ namespace EkwClicker
         public string CourtCode { get; }
         public string Number { get; }
         public int? ControlNumber { get; private set; }
+        public int Length => CourtCode.Length + Number.Length;
         
         public void SetControlNumber(int value)
         {
             ControlNumber = value;
+        }
+        
+        public static BookNumber Parse(string input)
+        {
+            var parts = input.Split('/');
+
+            if (parts.Length < 2)
+            {
+                throw new ArgumentException(
+                    "invalid format", nameof(input));
+            }
+
+            return new BookNumber(parts[0], parts[1]);
         }
     }
 }
