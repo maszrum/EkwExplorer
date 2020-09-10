@@ -66,7 +66,7 @@ namespace EkwClicker
 				.FindElements(By.Id("recaptchaResponseErrors"))
 				.FirstOrDefault();
 
-			if (container == default)
+			if (container == null)
 			{
 				return false;
 			}
@@ -88,7 +88,7 @@ namespace EkwClicker
 			_driver.Dispose();
 		}
 
-		private static IWebElement GetElementOrDefault(IWebElement element, By by)
+		private static IWebElement GetElementOrDefault(ISearchContext element, By by)
 			=> element.FindElements(by).FirstOrDefault();
 	}
 }
