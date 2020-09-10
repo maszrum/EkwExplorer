@@ -37,7 +37,14 @@ namespace EkwClicker
         {
             ControlDigit = value;
         }
-        
+
+        public override string ToString()
+        {
+            return ControlDigit.HasValue
+                ? $"{CourtCode}/{Number}/{ControlDigit}"
+                : $"{CourtCode}/{Number}/?";
+        }
+
         public static BookNumber Parse(string input)
         {
             var parts = input.Split('/');
