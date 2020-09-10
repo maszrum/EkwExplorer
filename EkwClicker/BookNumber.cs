@@ -22,20 +22,20 @@ namespace EkwClicker
             Number = number;
         }
         
-        public BookNumber(string courtCode, string number, int controlNumber) 
+        public BookNumber(string courtCode, string number, int controlDigit) 
             : this(courtCode, number)
         {
-            ControlNumber = controlNumber;
+            ControlDigit = controlDigit;
         }
         
         public string CourtCode { get; }
         public string Number { get; }
-        public int? ControlNumber { get; private set; }
+        public int? ControlDigit { get; private set; }
         public int Length => CourtCode.Length + Number.Length;
         
-        public void SetControlNumber(int value)
+        public void SetControlDigit(int value)
         {
-            ControlNumber = value;
+            ControlDigit = value;
         }
         
         public static BookNumber Parse(string input)
