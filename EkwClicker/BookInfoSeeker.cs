@@ -14,9 +14,9 @@ namespace EkwClicker
         
         public BookInfo ReadBookInfo(BookNumber bookNumber)
         {
-            _clicker.FillTextbox("kodWydzialuInput", "NS1T");
-            _clicker.FillTextbox("numerKsiegiWieczystej", "00046573");
-            _clicker.FillTextbox("cyfraKontrolna", "5");
+            _clicker.FillTextbox("kodWydzialuInput", bookNumber.CourtCode);
+            _clicker.FillTextbox("numerKsiegiWieczystej", bookNumber.Number);
+            _clicker.FillTextbox("cyfraKontrolna", bookNumber.ControlDigit.ToString());
              
             _clicker.ClickButton("wyszukaj");
 
