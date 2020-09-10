@@ -10,18 +10,10 @@ namespace EkwClicker
         public BookInfoSeeker(IClicker clicker)
         {
             _clicker = clicker;
-            
-            _clicker.StartingUrl = "https://przegladarka-ekw.ms.gov.pl/eukw_prz/KsiegiWieczyste/wyszukiwanieKW";
         }
         
-        public async Task<BookInfo> ReadBookInfo(BookNumber bookNumber)
+        public BookInfo ReadBookInfo(BookNumber bookNumber)
         {
-            _clicker.GotoHome();
-
-            await Task.Delay(1000);
-
-            _clicker.CloseCookiesInfo("//*[@id=\"cookies\"]/div/span/span");
-
             _clicker.FillTextbox("kodWydzialuInput", "NS1T");
             _clicker.FillTextbox("numerKsiegiWieczystej", "00046573");
             _clicker.FillTextbox("cyfraKontrolna", "5");
