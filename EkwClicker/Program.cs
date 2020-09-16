@@ -14,7 +14,7 @@ namespace EkwClicker
 
 			await Task.Delay(1000);
 
-			clicker.CloseCookiesInfo("//*[@id=\"cookies\"]/div/span/span");
+			clicker.CloseCookiesInfo();
 
 			clicker.FillTextbox("kodWydzialuInput", "NS1T");
 			clicker.FillTextbox("numerKsiegiWieczystej", "00046573");
