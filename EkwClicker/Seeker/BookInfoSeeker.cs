@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
+using EkwClicker.Core;
+using EkwClicker.Models;
 
-namespace EkwClicker
+namespace EkwClicker.Seeker
 {
     internal class BookInfoSeeker
     {

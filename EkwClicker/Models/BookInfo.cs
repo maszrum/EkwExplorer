@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace EkwClicker
+namespace EkwClicker.Models
 {
     internal class BookInfo
     {
