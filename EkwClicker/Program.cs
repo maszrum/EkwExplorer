@@ -38,7 +38,7 @@ namespace EkwClicker
 			var numbers = clicker.GetPropertyNumbers();
 
 			clicker.ClickButtonByName("Wykaz");
-			clicker.ClickButtonById("powrotDoKryterii");
+			clicker.ClickButtonById("powrotDoKryterii"); 
 		}
 	}
 }
