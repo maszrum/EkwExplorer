@@ -13,8 +13,16 @@ namespace EkwClicker.Seeker
             _clicker = clicker;
         }
         
-        public BookInfo ReadBookInfo(BookNumber bookNumber)
+        public void ReadBookInfo(BookInfo bookInfo)
         {
+            if (!bookInfo.Number.ControlDigit.HasValue)
+            {
+                throw new ArgumentException(
+                    "must be filled with value", nameof(bookInfo.Number.ControlDigit));
+            }
+            
+            var bookNumber = bookInfo.Number;
+            
             _clicker.FillTextbox("kodWydzialuInput", bookNumber.CourtCode);
             _clicker.FillTextbox("numerKsiegiWieczystej", bookNumber.Number);
             _clicker.FillTextbox("cyfraKontrolna", bookNumber.ControlDigit.ToString());
@@ -23,22 +31,13 @@ namespace EkwClicker.Seeker
 
             if (_clicker.CheckIfAnyError()) throw new Exception("captcha error");
 
-            var bookType = _clicker.GetValueFromTable("Typ księgi wieczystej");
-            var openingDate = _clicker.GetValueFromTable("Data zapisania księgi wieczystej");
-            var closureDate = _clicker.GetValueFromTable("Data zamknięcia księgi wieczystej");
-            var location = _clicker.GetValueFromTable("Położenie");
-            var owner = _clicker.GetValueFromTable("Właściciel");
+            bookInfo.BookType = _clicker.GetValueFromTable("Typ księgi wieczystej");
+            bookInfo.OpeningDate = _clicker.GetValueFromTable("Data zapisania księgi wieczystej");
+            bookInfo.ClosureDate = _clicker.GetValueFromTable("Data zamknięcia księgi wieczystej");
+            bookInfo.Location = _clicker.GetValueFromTable("Położenie");
+            bookInfo.Owner = _clicker.GetValueFromTable("Właściciel");
 
             _clicker.ClickButtonById("powrotDoKryterii");
-            
-            return new BookInfo()
-            {
-                BookType = bookType,
-                OpeningDate = openingDate,
-                ClosureDate = closureDate,
-                Location = location,
-                Owner = owner
-            };
         }
     }
 }

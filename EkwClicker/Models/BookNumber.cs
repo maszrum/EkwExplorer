@@ -27,7 +27,8 @@ namespace EkwClicker.Models
         {
             ControlDigit = controlDigit;
         }
-        
+
+        public Guid Id { get; set; }
         public string CourtCode { get; }
         public string Number { get; }
         public int? ControlDigit { get; private set; }
