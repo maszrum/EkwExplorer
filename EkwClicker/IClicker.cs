@@ -8,6 +8,7 @@ namespace EkwClicker
         void GotoHome();
         void FillTextbox(string textboxId, string text);
         void ClickButtonById(string buttonId);
+        void ClickButtonByName(string buttonName);
         string GetValueFromTable(string rowCaption);
         bool CheckIfAnyError();
         void CloseCookiesInfo();

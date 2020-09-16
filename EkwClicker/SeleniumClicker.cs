@@ -38,6 +38,17 @@ namespace EkwClicker
 		public void ClickButtonById(string buttonId)
 		{
 			var button = _driver.FindElement(By.Id(buttonId));
+			ClickButton(button);
+		}
+
+		public void ClickButtonByName(string buttonName)
+		{
+			var button = _driver.FindElement(By.Name(buttonName));
+			ClickButton(button);
+		}
+
+		private void ClickButton(IWebElement button)
+		{
 			var actions = new Actions(_driver);
 
 			actions

@@ -36,9 +36,8 @@ namespace EkwClicker
 			clicker.ClickButtonById("przyciskWydrukZwykly");
 			var numbers = clicker.GetPropertyNumbers();
 
-
-			Console.WriteLine("aaa");
-			//clicker.ClickButton("powrotDoKryterii");
+			clicker.ClickButtonByName("Wykaz");
+			clicker.ClickButton("powrotDoKryterii");
 		}
 	}
 }
