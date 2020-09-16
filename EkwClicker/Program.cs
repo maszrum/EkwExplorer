@@ -12,8 +12,8 @@ namespace EkwClicker
 			var url = "https://przegladarka-ekw.ms.gov.pl/eukw_prz/KsiegiWieczyste/wyszukiwanieKW";
 			using var clicker = new SeleniumClicker(url);
 
+			clicker.GotoHome();
 			await Task.Delay(1000);
-
 			clicker.CloseCookiesInfo();
 
 			clicker.FillTextbox("kodWydzialuInput", "NS1T");
@@ -33,7 +33,10 @@ namespace EkwClicker
 			string location = clicker.GetValueFromTable("Położenie");
 			string owner = clicker.GetValueFromTable("Właściciel");
 
-			clicker.ClickButton("powrotDoKryterii");
+			clicker.ClickButton("przyciskWydrukZwykly");
+			var numbers = clicker.GetPropertyNumbers();
+
+			//clicker.ClickButton("powrotDoKryterii");
 		}
 	}
 }

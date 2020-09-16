@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EkwClicker
 {
@@ -10,5 +11,6 @@ namespace EkwClicker
         string GetValueFromTable(string rowCaption);
         bool CheckIfAnyError();
         void CloseCookiesInfo();
+        IReadOnlyList<string> GetPropertyNumbers();
     }
 }

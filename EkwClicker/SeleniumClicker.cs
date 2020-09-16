@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -92,6 +93,36 @@ namespace EkwClicker
 			_driver
 				.FindElement(By.XPath("//*[@id=\"cookies\"]/div/span/span"))
 				.Click();
+		}
+
+		public IReadOnlyList<string> GetPropertyNumbers()
+		{
+			var contentElement = _driver.FindElement(By.Id("contentDzialu"));
+			var tableLines = contentElement
+				.FindElements(By.TagName("table"))
+				.Select(t => t.FindElements(By.TagName("tbody")).FirstOrDefault() ?? t)
+				.SelectMany(t => t.FindElements(By.TagName("tr")))
+				.ToArray();
+
+			var result = new List<string>();
+
+			foreach (var line in tableLines)
+			{
+				var cells = line.FindElements(By.TagName("td"));
+
+				if (cells.Count >= 2)
+				{
+					var firstCellText = cells[0].Text.ToLower();
+					var isValidLine = firstCellText == "numer działki";
+
+					if (isValidLine)
+					{
+						result.Add(cells[1].Text);
+					}
+				}
+			}
+
+			return result;
 		}
 
 		public void Dispose()
