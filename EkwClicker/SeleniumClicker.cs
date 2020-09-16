@@ -35,7 +35,7 @@ namespace EkwClicker
 				.SendKeys(text);
 		}
 
-		public void ClickButton(string buttonId)
+		public void ClickButtonById(string buttonId)
 		{
 			var button = _driver.FindElement(By.Id(buttonId));
 			var actions = new Actions(_driver);

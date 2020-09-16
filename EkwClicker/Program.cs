@@ -20,7 +20,7 @@ namespace EkwClicker
 			clicker.FillTextbox("numerKsiegiWieczystej", "00046573");
 			clicker.FillTextbox("cyfraKontrolna", "5");
 
-			clicker.ClickButton("wyszukaj");
+			clicker.ClickButtonById("wyszukaj");
 
 			if (clicker.CheckIfAnyError())
 			{
@@ -33,9 +33,11 @@ namespace EkwClicker
 			string location = clicker.GetValueFromTable("Położenie");
 			string owner = clicker.GetValueFromTable("Właściciel");
 
-			clicker.ClickButton("przyciskWydrukZwykly");
+			clicker.ClickButtonById("przyciskWydrukZwykly");
 			var numbers = clicker.GetPropertyNumbers();
 
+
+			Console.WriteLine("aaa");
 			//clicker.ClickButton("powrotDoKryterii");
 		}
 	}

@@ -18,7 +18,7 @@ namespace EkwClicker
             _clicker.FillTextbox("numerKsiegiWieczystej", bookNumber.Number);
             _clicker.FillTextbox("cyfraKontrolna", bookNumber.ControlDigit.ToString());
              
-            _clicker.ClickButton("wyszukaj");
+            _clicker.ClickButtonById("wyszukaj");
 
             if (_clicker.CheckIfAnyError()) throw new Exception("captcha error");
 
@@ -28,7 +28,7 @@ namespace EkwClicker
             var location = _clicker.GetValueFromTable("Położenie");
             var owner = _clicker.GetValueFromTable("Właściciel");
 
-            _clicker.ClickButton("powrotDoKryterii");
+            _clicker.ClickButtonById("powrotDoKryterii");
             
             return new BookInfo()
             {
