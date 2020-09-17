@@ -37,13 +37,19 @@ namespace EkwClicker.Datasource
 
 			foreach (var tableFile in Directory.EnumerateFiles(TablesSqlDirectory, "*.sqlite"))
 			{
-				var tableSql = File.ReadAllText(tableFile);
+				var tableSql = await File.ReadAllTextAsync(tableFile);
 				await connection.Db.ExecuteAsync(tableSql);
 			}
 
 			return connection;
 		}
 
+		public static void Remove(string database)
+		{
+			var dbFilePath = GetDatabasePath(database);
+			File.Delete(dbFilePath);
+		}
+		
 		private static string GetDatabasePath(string database)
 			=> Path.Combine(DatabasesDirectory, database);
 	}

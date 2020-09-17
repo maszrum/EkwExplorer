@@ -1,5 +1,5 @@
 ﻿CREATE TABLE `Book` (
-	`Id`	BLOB NOT NULL UNIQUE,
+	`Id`	TEXT NOT NULL UNIQUE,
 	`CourtCode`	TEXT,
 	`Number`	TEXT,
 	`ControlDigit`	INTEGER,

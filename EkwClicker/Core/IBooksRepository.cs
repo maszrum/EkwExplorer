@@ -1,12 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using EkwClicker.Models;
 
 namespace EkwClicker.Core
 {
 	internal interface IBooksRepository
     {
-        Task<Guid> GetEmptyRandomIdAsync();
+        Task<BookInfo> GetRandomNotFilledBookAsync();
         Task AddAsync(BookInfo bookInfo);
     }
 }

@@ -4,7 +4,7 @@ namespace EkwClicker.Datasource.Entities
 {
     internal class BookEntity
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         
         public string CourtCode { get; set; }
         public string Number { get; set; }

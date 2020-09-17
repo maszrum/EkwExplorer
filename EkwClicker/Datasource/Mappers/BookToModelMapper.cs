@@ -11,9 +11,11 @@ namespace EkwClicker.Datasource.Mappers
         public BookToModelMapper Map(BookEntity bookEntity)
         {
             var bookNumber = new BookNumber(
-                bookEntity.CourtCode, bookEntity.Number, bookEntity.ControlDigit);
+                bookEntity.CourtCode.ToUpper(), bookEntity.Number, bookEntity.ControlDigit);
 
-            _book = new BookInfo(bookEntity.Id, bookNumber)
+            var bookId = Guid.ParseExact(bookEntity.Id, "N");
+            
+            _book = new BookInfo(bookId, bookNumber)
             {
                 BookType = bookEntity.BookType,
                 ClosureDate = bookEntity.ClosureDate,
@@ -27,8 +29,10 @@ namespace EkwClicker.Datasource.Mappers
 
         public BookToModelMapper WithProperty(PropertyNumberEntity propertyNumberEntity)
         {
+            var propertyId = Guid.ParseExact(propertyNumberEntity.Id, "n");
+            
             var propertyNumber = new PropertyNumber(
-                propertyNumberEntity.Id, propertyNumberEntity.Number);
+                propertyId, propertyNumberEntity.Number);
 
             _book.PropertyNumbers.Add(propertyNumber);
 

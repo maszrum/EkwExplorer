@@ -1,6 +1,6 @@
 ﻿CREATE TABLE `PropertyNumber` (
-	`Id`	BLOB NOT NULL UNIQUE,
-	`BookId`	BLOB NOT NULL,
+	`Id`	TEXT NOT NULL UNIQUE,
+	`BookId`	TEXT NOT NULL,
 	`Number`	TEXT NOT NULL,
 	PRIMARY KEY(`Id`)
 );

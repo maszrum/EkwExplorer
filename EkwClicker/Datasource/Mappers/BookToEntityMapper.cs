@@ -28,9 +28,9 @@ namespace EkwClicker.Datasource.Mappers
                 BookType = _book.BookType,
                 ClosureDate = _book.ClosureDate,
                 ControlDigit = _book.Number.ControlDigit.Value,
-                CourtCode = _book.Number.CourtCode,
+                CourtCode = _book.Number.CourtCode.ToUpper(),
                 Filled = filled,
-                Id = _book.Id,
+                Id = _book.Id.ToString("N"),
                 Location = _book.Location,
                 Number = _book.Number.Number,
                 OpeningDate = _book.OpeningDate,
@@ -46,7 +46,7 @@ namespace EkwClicker.Datasource.Mappers
                 new PropertyNumberEntity
                 {
                     BookId = _book.Id,
-                    Id = property.Id,
+                    Id = property.Id.ToString("N"),
                     Number = property.Number
                 });
         }
