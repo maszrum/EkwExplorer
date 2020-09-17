@@ -1,13 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EkwClicker.Datasource;
 using EkwClicker.Seeker;
 
 namespace EkwClicker
 {
 	internal class Program
 	{
+
 		private static async Task Main(string[] args)
 		{
+			var databaseFile = "sample.db";
+			var connection = DbAccess.Exists(databaseFile) 
+				? await DbAccess.Connect(databaseFile) 
+				: await DbAccess.Create(databaseFile);
+
+			using (connection)
+			{
+
+			}
+
 			// wyszukaj
 
 			var url = "https://przegladarka-ekw.ms.gov.pl/eukw_prz/KsiegiWieczyste/wyszukiwanieKW";

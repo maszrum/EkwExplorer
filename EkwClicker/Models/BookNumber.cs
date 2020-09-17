@@ -33,7 +33,8 @@ namespace EkwClicker.Models
         public string Number { get; }
         public int? ControlDigit { get; private set; }
         public int Length => CourtCode.Length + Number.Length;
-        
+        public int NumberAsInt => int.Parse(Number.TrimStart('0'));
+
         public void SetControlDigit(int value)
         {
             ControlDigit = value;

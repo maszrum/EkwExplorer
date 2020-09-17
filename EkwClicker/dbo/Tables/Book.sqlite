@@ -1,0 +1,13 @@
+﻿CREATE TABLE `Book` (
+	`Id`	BLOB NOT NULL UNIQUE,
+	`CourtCode`	TEXT,
+	`Number`	TEXT,
+	`ControlDigit`	INTEGER,
+	`BookType`	TEXT,
+	`OpeningDate`	TEXT,
+	`ClosureDate`	TEXT,
+	`Location`	TEXT,
+	`Owner`	TEXT,
+	`Filled`	INTEGER,
+	PRIMARY KEY(`Id`)
+);
