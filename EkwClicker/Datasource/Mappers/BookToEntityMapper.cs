@@ -45,7 +45,7 @@ namespace EkwClicker.Datasource.Mappers
             return _book.PropertyNumbers.Select(property =>
                 new PropertyNumberEntity
                 {
-                    BookId = _book.Id,
+                    BookId = _book.Id.ToString("N"),
                     Id = property.Id.ToString("N"),
                     Number = property.Number
                 });

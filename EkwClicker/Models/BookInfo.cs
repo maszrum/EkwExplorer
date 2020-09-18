@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EkwClicker.Models
@@ -25,10 +26,12 @@ namespace EkwClicker.Models
         public List<PropertyNumber> PropertyNumbers { get; } = new List<PropertyNumber>();
         public BookNumber Number { get; }
 
-        public void AddNewPropertyNumber(string propertyNumber)
+        public void AddNewProperties(IEnumerable<string> propertyNumbers)
         {
-            var property = new PropertyNumber(Guid.NewGuid(), propertyNumber);
-            PropertyNumbers.Add(property);
+            var properties = propertyNumbers
+                .Select(p => new PropertyNumber(Guid.NewGuid(), p));
+
+            PropertyNumbers.AddRange(properties);
         }
 
         public override string ToString()
@@ -45,6 +48,15 @@ namespace EkwClicker.Models
                 .AppendLine($"Owner: {Owner}")
                 .AppendLine($"Properties: {properties}")
                 .ToString();
+        }
+
+        public static void MarkAsNotFound(BookInfo bookInfo)
+        {
+            bookInfo.BookType = "not found";
+            bookInfo.OpeningDate = "-";
+            bookInfo.ClosureDate = "-";
+            bookInfo.Location = "-";
+            bookInfo.Owner = "-";
         }
     }
 }

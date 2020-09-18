@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 
@@ -50,6 +52,14 @@ namespace EkwClicker.Datasource
 			File.Delete(dbFilePath);
 		}
 		
+		public static IReadOnlyList<string>GetAvailableDatabases()
+		{
+			var files = Directory.EnumerateFiles(DatabasesDirectory, "*", SearchOption.TopDirectoryOnly);
+			return files
+				.Select(fn => Path.GetFileName(fn))
+				.ToArray();
+		}
+
 		private static string GetDatabasePath(string database)
 			=> Path.Combine(DatabasesDirectory, database);
 	}

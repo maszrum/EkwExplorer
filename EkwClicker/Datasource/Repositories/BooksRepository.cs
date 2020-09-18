@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using EkwClicker.Core;
@@ -64,6 +65,24 @@ namespace EkwClicker.Datasource.Repositories
             var query = SqlQueries.IsAnyNotFilled;
 
             return _connection.Db.ExecuteScalarAsync<bool>(query);
+        }
+
+        public async Task AddPropertyFromBookAsync(BookInfo bookInfo)
+        {
+            var entities = new BookToEntityMapper(bookInfo)
+                .MapPropertyNumbers()
+                .ToList();
+
+            if (entities.Count > 0)
+            {
+                var query = SqlQueries.AddProperty;
+
+                var transaction = await _connection.Db.BeginTransactionAsync();
+
+                await _connection.Db.ExecuteAsync(query, entities);
+
+                await transaction.CommitAsync();
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ namespace EkwClicker.Core
     {
         Task AddBookAsync(BookInfo bookInfo);
         Task UpdateBookAsync(BookInfo bookInfo);
+        Task AddPropertyFromBookAsync(BookInfo bookInfo);
         Task<bool> IsAnyNotFilled();
         Task<BookInfo> GetRandomNotFilledBookAsync();
     }

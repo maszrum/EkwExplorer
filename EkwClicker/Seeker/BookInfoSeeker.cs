@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using EkwClicker.Core;
 using EkwClicker.Models;
 
@@ -13,7 +14,7 @@ namespace EkwClicker.Seeker
             _clicker = clicker;
         }
         
-        public void ReadBookInfo(BookInfo bookInfo)
+        public bool ReadBookInfo(BookInfo bookInfo)
         {
             if (!bookInfo.Number.ControlDigit.HasValue)
             {
@@ -31,13 +32,29 @@ namespace EkwClicker.Seeker
 
             if (_clicker.CheckIfAnyError()) throw new Exception("captcha error");
 
-            bookInfo.BookType = _clicker.GetValueFromTable("Typ księgi wieczystej");
-            bookInfo.OpeningDate = _clicker.GetValueFromTable("Data zapisania księgi wieczystej");
-            bookInfo.ClosureDate = _clicker.GetValueFromTable("Data zamknięcia księgi wieczystej");
-            bookInfo.Location = _clicker.GetValueFromTable("Położenie");
-            bookInfo.Owner = _clicker.GetValueFromTable("Właściciel");
+            if (!_clicker.CheckIfNotFound())
+            {
+                bookInfo.BookType = _clicker.GetValueFromTable("Typ księgi wieczystej");
+                bookInfo.OpeningDate = _clicker.GetValueFromTable("Data zapisania księgi wieczystej");
+                bookInfo.ClosureDate = _clicker.GetValueFromTable("Data zamknięcia księgi wieczystej");
+                bookInfo.Location = _clicker.GetValueFromTable("Położenie");
+                bookInfo.Owner = _clicker.GetValueFromTable("Właściciel");
 
-            _clicker.ClickButtonById("powrotDoKryterii");
+                return true;
+            }
+
+            return false;
+        }
+
+        public IReadOnlyList<string> ReadProperties()
+        {
+            _clicker.ClickButtonById("przyciskWydrukZwykly");
+
+            var numbers = _clicker.GetPropertyNumbers();
+
+            _clicker.ClickButtonByName("Wykaz");
+
+            return numbers;
         }
     }
 }

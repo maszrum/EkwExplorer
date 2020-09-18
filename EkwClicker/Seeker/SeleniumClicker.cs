@@ -10,23 +10,19 @@ namespace EkwClicker.Seeker
 {
 	internal class SeleniumClicker : IClicker
 	{
-		private readonly ChromeDriver _driver = new ChromeDriver();
-		private readonly string _homeUrl;
+		private const string HomeUrl = "https://przegladarka-ekw.ms.gov.pl/eukw_prz/KsiegiWieczyste/wyszukiwanieKW";
 
-		public SeleniumClicker(string homeUrl)
-		{
-			_homeUrl = homeUrl;
-		}
+		private readonly ChromeDriver _driver = new ChromeDriver();
 
 		public void GotoHome()
 		{
-			if (string.IsNullOrEmpty(_homeUrl))
+			if (string.IsNullOrEmpty(HomeUrl))
 			{
 				throw new NullReferenceException(
-					$"property {nameof(_homeUrl)} cannot be null");
+					$"property {nameof(HomeUrl)} cannot be null");
 			}
 			
-			_driver.Navigate().GoToUrl(_homeUrl);
+			_driver.Navigate().GoToUrl(HomeUrl);
 		}
 		
 		public void FillTextbox(string textboxId, string text)
@@ -100,6 +96,15 @@ namespace EkwClicker.Seeker
 			return errorsElements.Count > 0;
 		}
 
+		public bool CheckIfNotFound()
+		{
+			var sections = _driver
+				.FindElements(By.ClassName("section"))
+				.SelectMany(s => s.FindElements(By.TagName("p")));
+
+			return sections.Any(s => s.Text.Contains("nie została"));
+		}
+
 		public void CloseCookiesInfo()
 		{
 			_driver
@@ -135,6 +140,11 @@ namespace EkwClicker.Seeker
 			}
 
 			return result;
+		}
+
+		public void BackToCriteria()
+		{
+			ClickButtonById("powrotDoKryterii");
 		}
 
 		public void Dispose()

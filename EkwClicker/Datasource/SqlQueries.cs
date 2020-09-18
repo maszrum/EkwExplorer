@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using EkwClicker.Datasource.Entities;
 
@@ -8,6 +7,7 @@ namespace EkwClicker.Datasource
     internal static class SqlQueries
     {
         private const string BookTableName = "Book";
+        private const string PropertyTableName = "PropertyNumber";
         
         public static string AddBook { get; } 
             = CreateInsertQueryForEntity<BookEntity>(BookTableName);
@@ -20,6 +20,9 @@ namespace EkwClicker.Datasource
 
         public static string UpdateBook { get; }
             = CreateUpdateQueryForEntity<BookEntity>(BookTableName);
+
+        public static string AddProperty { get; }
+            = CreateInsertQueryForEntity<PropertyNumberEntity>(PropertyTableName);
 
         private static string CreateInsertQueryForEntity<T>(string tableName)
         {

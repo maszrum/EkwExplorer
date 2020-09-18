@@ -11,6 +11,7 @@ namespace EkwClicker.Core
         void ClickButtonByName(string buttonName);
         string GetValueFromTable(string rowCaption);
         bool CheckIfAnyError();
+        bool CheckIfNotFound();
         void CloseCookiesInfo();
         IReadOnlyList<string> GetPropertyNumbers();
     }
