@@ -31,8 +31,6 @@ namespace EkwClicker
                     var numberTo = new BookNumber(input.CourtCode, input.NumberTo.Value.ToString("D8"));
                     await seeder.SeedAsync(numberFrom, numberTo);
                 }
-                
-                var randomBook = await repository.GetRandomNotFilledBookAsync();
             }
 
             DbAccess.Remove(input.DatabaseFile);

@@ -5,7 +5,9 @@ namespace EkwClicker.Core
 {
 	internal interface IBooksRepository
     {
+        Task AddBookAsync(BookInfo bookInfo);
+        Task UpdateBookAsync(BookInfo bookInfo);
+        Task<bool> IsAnyNotFilled();
         Task<BookInfo> GetRandomNotFilledBookAsync();
-        Task AddAsync(BookInfo bookInfo);
     }
 }

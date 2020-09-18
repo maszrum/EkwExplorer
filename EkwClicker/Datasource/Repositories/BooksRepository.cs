@@ -17,12 +17,27 @@ namespace EkwClicker.Datasource.Repositories
             _connection = connection ?? throw new ArgumentNullException(nameof(connection));
         }
 
-        public async Task AddAsync(BookInfo bookInfo)
+        public async Task AddBookAsync(BookInfo bookInfo)
         {
             var query = SqlQueries.AddBook;
             var entity = new BookToEntityMapper(bookInfo).MapBook();
             
             await _connection.Db.ExecuteAsync(query, entity);
+        }
+
+        public async Task UpdateBookAsync(BookInfo bookInfo)
+        {
+            var query = SqlQueries.UpdateBook;
+
+            var entity = new BookToEntityMapper(bookInfo).MapBook();
+
+            var updatedRows = await _connection.Db.ExecuteAsync(query, entity);
+
+            if (updatedRows != 1)
+            {
+                throw new ArgumentException(
+                    "book with specified id was not found", nameof(bookInfo));
+            }
         }
 
         public async Task<BookInfo> GetRandomNotFilledBookAsync()
@@ -42,6 +57,13 @@ namespace EkwClicker.Datasource.Repositories
                 .Finish();
             
             return model;
+        }
+
+        public Task<bool> IsAnyNotFilled()
+        {
+            var query = SqlQueries.IsAnyNotFilled;
+
+            return _connection.Db.ExecuteScalarAsync<bool>(query);
         }
     }
 }

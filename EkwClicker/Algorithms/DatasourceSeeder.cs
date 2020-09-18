@@ -47,7 +47,7 @@ namespace EkwClicker.Algorithms
 
 				var bookInfo = new BookInfo(Guid.NewGuid(), bookNumber);
 
-				await _repository.AddAsync(bookInfo);
+				await _repository.AddBookAsync(bookInfo);
 			}
 		}
 	}
