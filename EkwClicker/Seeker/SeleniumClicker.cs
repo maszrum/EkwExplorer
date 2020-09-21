@@ -46,6 +46,7 @@ namespace EkwClicker.Seeker
 
 		private void ClickButton(IWebElement button)
 		{
+			
 			var actions = new Actions(_driver);
 
 			actions

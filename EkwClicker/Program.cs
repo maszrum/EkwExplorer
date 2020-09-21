@@ -46,25 +46,41 @@ namespace EkwClicker
             await Task.Delay(1000);
             clicker.CloseCookiesInfo();
 
-            for (int i = 1; i <= 10; i++)
+            while (true)
             {
                 var randomBook = await repository.GetRandomNotFilledBookAsync();
 
-                var bookExists = seeker.ReadBookInfo(randomBook);
-                if (!bookExists)
+                var bookExists = false;
+                var captchaError = false;
+                try
                 {
-                    BookInfo.MarkAsNotFound(randomBook);
+                    bookExists = seeker.ReadBookInfo(randomBook);
                 }
-                else
+                catch (Exception exception) when (exception.Message.Contains("captcha"))
                 {
-                    var properties = seeker.ReadProperties();
-                    randomBook.AddNewProperties(properties);
+                    captchaError = true;
                 }
+                
+                if (!captchaError)
+                {
+                    if (!bookExists)
+                    {
+                        BookInfo.MarkAsNotFound(randomBook);
+                    }
+                    else
+                    {
+                        if (randomBook.ClosureDate.Length <= 4)
+                        {
+                            var properties = seeker.ReadProperties();
+                            randomBook.AddNewProperties(properties);
+                        }
+                    }
 
-                await repository.UpdateBookAsync(randomBook);
-                await repository.AddPropertyFromBookAsync(randomBook);
-
-                clicker.BackToCriteria();
+                    await repository.UpdateBookAsync(randomBook);
+                    await repository.AddPropertyFromBookAsync(randomBook);
+                    
+                    clicker.BackToCriteria();
+                }
             }
         }
     }
