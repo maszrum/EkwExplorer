@@ -3,7 +3,7 @@ using EkwClicker.Models;
 
 namespace EkwClicker.Core
 {
-	internal interface IBooksRepository
+    internal interface IBooksRepository
     {
         Task AddBookAsync(BookInfo bookInfo);
         Task UpdateBookAsync(BookInfo bookInfo);
