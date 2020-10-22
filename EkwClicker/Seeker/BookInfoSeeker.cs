@@ -7,12 +7,12 @@ namespace EkwClicker.Seeker
 {
     internal class BookInfoSeeker
     {
-        private readonly IClicker _clicker;
-
         public BookInfoSeeker(IClicker clicker)
         {
-            _clicker = clicker;
+            Clicker = clicker;
         }
+        
+        public IClicker Clicker { get; }
         
         public bool ReadBookInfo(BookInfo bookInfo)
         {
@@ -24,21 +24,21 @@ namespace EkwClicker.Seeker
             
             var bookNumber = bookInfo.Number;
             
-            _clicker.FillTextbox("kodWydzialuInput", bookNumber.CourtCode);
-            _clicker.FillTextbox("numerKsiegiWieczystej", bookNumber.Number);
-            _clicker.FillTextbox("cyfraKontrolna", bookNumber.ControlDigit.ToString());
+            Clicker.FillTextbox("kodWydzialuInput", bookNumber.CourtCode);
+            Clicker.FillTextbox("numerKsiegiWieczystej", bookNumber.Number);
+            Clicker.FillTextbox("cyfraKontrolna", bookNumber.ControlDigit.ToString());
              
-            _clicker.ClickButtonById("wyszukaj");
+            Clicker.ClickButtonById("wyszukaj");
 
-            if (_clicker.CheckIfAnyError()) throw new Exception("captcha error");
+            if (Clicker.CheckIfAnyError()) throw new Exception("captcha error");
 
-            if (!_clicker.CheckIfNotFound())
+            if (!Clicker.CheckIfNotFound())
             {
-                bookInfo.BookType = _clicker.GetValueFromTable("Typ księgi wieczystej");
-                bookInfo.OpeningDate = _clicker.GetValueFromTable("Data zapisania księgi wieczystej");
-                bookInfo.ClosureDate = _clicker.GetValueFromTable("Data zamknięcia księgi wieczystej");
-                bookInfo.Location = _clicker.GetValueFromTable("Położenie");
-                bookInfo.Owner = _clicker.GetValueFromTable("Właściciel");
+                bookInfo.BookType = Clicker.GetValueFromTable("Typ księgi wieczystej");
+                bookInfo.OpeningDate = Clicker.GetValueFromTable("Data zapisania księgi wieczystej");
+                bookInfo.ClosureDate = Clicker.GetValueFromTable("Data zamknięcia księgi wieczystej");
+                bookInfo.Location = Clicker.GetValueFromTable("Położenie");
+                bookInfo.Owner = Clicker.GetValueFromTable("Właściciel");
 
                 return true;
             }
@@ -46,15 +46,20 @@ namespace EkwClicker.Seeker
             return false;
         }
 
-        public IReadOnlyList<string> ReadProperties()
+        public IEnumerable<string> ReadProperties()
         {
-            _clicker.ClickButtonById("przyciskWydrukZwykly");
+            Clicker.ClickButtonById("przyciskWydrukZwykly");
 
-            var numbers = _clicker.GetPropertyNumbers();
+            var numbers = Clicker.GetPropertyNumbers();
 
-            _clicker.ClickButtonByName("Wykaz");
+            Clicker.ClickButtonByName("Wykaz");
 
             return numbers;
+        }
+
+        public void BackToCriteria()
+        {
+            Clicker.ClickButtonById("powrotDoKryterii");
         }
     }
 }
