@@ -41,15 +41,22 @@ namespace EkwClicker.Datasource
         private static string CreateUpdateQueryForEntity<T>(string tableName)
         {
             var idProperty = typeof(T)
-                .GetProperty("Id")
-                .GetGetMethod();
+                .GetProperty("Id");
 
-            if (idProperty == null || idProperty.ReturnType != typeof(string))
+            if (idProperty == null)
             {
                 throw new ArgumentException(
                     "has no property Id with return type string", nameof(T));
             }
+            
+            var idGetter = idProperty.GetGetMethod();
 
+            if (idGetter == null || idGetter.ReturnType != typeof(string))
+            {
+                throw new ArgumentException(
+                    "has no getter Id with return type string", nameof(T));
+            }
+            
             var properties = typeof(T)
                 .GetProperties()
                 .Where(p => p.CanRead)
