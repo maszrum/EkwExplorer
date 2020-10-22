@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -44,7 +45,6 @@ namespace EkwClicker.Datasource.Repositories
         public async Task<BookInfo> GetRandomNotFilledBookAsync()
         {
             var query = SqlQueries.GetRandomNotFilledBook;
-            
             var entity = await _connection.Db.QuerySingleOrDefaultAsync<BookEntity>(query);
             
             if (entity == null)
