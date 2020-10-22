@@ -12,8 +12,18 @@ namespace EkwClicker.Seeker
 	{
 		private const string HomeUrl = "https://przegladarka-ekw.ms.gov.pl/eukw_prz/KsiegiWieczyste/wyszukiwanieKW";
 
-		private readonly ChromeDriver _driver = new ChromeDriver();
+		private readonly ChromeDriver _driver;
 
+		public SeleniumClicker()
+		{
+			_driver = new ChromeDriver();
+		}
+		
+		public SeleniumClicker(ChromeOptions options)
+		{
+			_driver = new ChromeDriver(options);
+		}
+		
 		public void GotoHome()
 		{
 			if (string.IsNullOrEmpty(HomeUrl))
@@ -141,11 +151,6 @@ namespace EkwClicker.Seeker
 			}
 
 			return result;
-		}
-
-		public void BackToCriteria()
-		{
-			ClickButtonById("powrotDoKryterii");
 		}
 
 		public void Dispose()
