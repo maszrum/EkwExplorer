@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -32,54 +31,7 @@ namespace EkwClicker
             return sb.ToString();
         }
 
-        public static ProgramInput ReadFromConsole()
-        {
-            var input = new ProgramInput();
-            
-            Console.WriteLine("Enter database file:");
-            input.DatabaseFile = Console.ReadLine()?.Trim();
-            
-            Console.WriteLine("Enter 4-character court code or 'x' to continue exploring:");
-            input.CourtCode = Console.ReadLine()?.Trim();
-            
-            if (input.CourtCode != "x")
-            {
-                Console.WriteLine("Enter starting number:");
-                var numberFromInput = Console.ReadLine()?.Trim();
-                
-                if (string.IsNullOrEmpty(numberFromInput) || !int.TryParse(numberFromInput, out var numberFrom))
-                {
-                    throw new ArgumentException(
-                        "must be a number", nameof(input.NumberFrom));
-                }
-                input.NumberFrom = numberFrom;
-                
-                Console.WriteLine("Enter finish number:");
-                var numberToInput = Console.ReadLine()?.Trim();
-                if (string.IsNullOrEmpty(numberToInput) || !int.TryParse(numberToInput, out var numberTo))
-                {
-                    throw new ArgumentException(
-                        "must be a number", nameof(input.NumberFrom));
-                }
-                input.NumberTo = numberTo;
-            }
-            
-            input.ThrowIfInvalid();
-            
-            return input;
-        }
-        
-        public static ProgramInput ReadFromJsonFile(string configFile)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public static ProgramInput ReadFromArgs(IReadOnlyList<string> args)
-        {
-            throw new NotImplementedException();
-        }
-        
-        private void ThrowIfInvalid()
+        public void ThrowIfInvalid()
         {
             if (string.IsNullOrEmpty(DatabaseFile))
             {

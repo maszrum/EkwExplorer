@@ -56,7 +56,7 @@ namespace EkwClicker
             switch (args.Count)
             {
                 case 1 when args[0].Contains(".json"):
-                    return ProgramInput.ReadFromJsonFile(args[0]);
+                    return new ProgramInput().ReadFromJson(args[0]);
                 case 0:
                 {
                     var availableDatabases = DbAccess.GetAvailableDatabases();
@@ -68,10 +68,10 @@ namespace EkwClicker
                         Console.WriteLine(string.Join(Environment.NewLine, availableDatabases));
                     }
                 
-                    return ProgramInput.ReadFromConsole();
+                    return new ProgramInput().ReadFromConsole();
                 }
                 default:
-                    return ProgramInput.ReadFromArgs(args);
+                    return new ProgramInput().ReadFromArgs(args);
             }
         }
     }
