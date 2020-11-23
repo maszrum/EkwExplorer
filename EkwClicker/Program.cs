@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EkwClicker.Algorithms;
 using EkwClicker.Core;
@@ -18,17 +19,9 @@ namespace EkwClicker
         
         private static async Task Main(string[] args)
         {
-            var availableDatabases = DbAccess.GetAvailableDatabases();
-            if (availableDatabases.Count == 0)
-                Console.WriteLine("No available databases");
-            else
-            {
-                Console.WriteLine("Available databases:");
-                Console.WriteLine(string.Join(Environment.NewLine, availableDatabases));
-            }
+            var input = ReadProgramInput(args);
+            Console.WriteLine(input);
 
-            var input = ProgramInput.ReadFromConsole();
-            
             await using var connection = DbAccess.Exists(input.DatabaseFile)
                 ? await DbAccess.Connect(input.DatabaseFile)
                 : await DbAccess.Create(input.DatabaseFile);
@@ -78,6 +71,30 @@ namespace EkwClicker
                 }
                 
                 Console.WriteLine($"Downloaded books: {downloadedBooks}");
+            }
+        }
+        
+        private static ProgramInput ReadProgramInput(IReadOnlyList<string> args)
+        {
+            switch (args.Count)
+            {
+                case 1 when args[0].Contains(".json"):
+                    return ProgramInput.ReadFromJsonFile(args[0]);
+                case 0:
+                {
+                    var availableDatabases = DbAccess.GetAvailableDatabases();
+                    if (availableDatabases.Count == 0)
+                        Console.WriteLine("No available databases");
+                    else
+                    {
+                        Console.WriteLine("Available databases:");
+                        Console.WriteLine(string.Join(Environment.NewLine, availableDatabases));
+                    }
+                
+                    return ProgramInput.ReadFromConsole();
+                }
+                default:
+                    return ProgramInput.ReadFromArgs(args);
             }
         }
         

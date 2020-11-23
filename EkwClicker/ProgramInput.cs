@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 
 namespace EkwClicker
 {
@@ -8,7 +11,27 @@ namespace EkwClicker
         public string CourtCode { get; set; }
         public int? NumberFrom { get; set; }
         public int? NumberTo { get; set; }
-        
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder()
+                .AppendLine($"Database: {DatabaseFile}")
+                .AppendLine($"Court code: {CourtCode}");
+            
+            if (NumberFrom.HasValue && NumberTo.HasValue)
+            {
+                sb.Append("Find codes ")
+                    .Append($"from {CourtCode}/{NumberFrom.Value.ToString("D8", CultureInfo.InvariantCulture)}")
+                    .AppendLine($" to {CourtCode}/{NumberFrom.Value.ToString("D8", CultureInfo.InvariantCulture)}");
+            }
+            else
+            {
+                sb.AppendLine("Find codes defined in existing database");
+            }
+            
+            return sb.ToString();
+        }
+
         public static ProgramInput ReadFromConsole()
         {
             var input = new ProgramInput();
@@ -47,6 +70,11 @@ namespace EkwClicker
         }
         
         public static ProgramInput ReadFromJsonFile(string configFile)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public static ProgramInput ReadFromArgs(IReadOnlyList<string> args)
         {
             throw new NotImplementedException();
         }
