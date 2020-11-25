@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwClicker", "EkwClicker\EkwClicker.csproj", "{2A1C0456-88C4-4867-8AD2-53B7E591BBC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwExplorer.ConsoleApp", "EkwExplorer.ConsoleApp\EkwExplorer.ConsoleApp.csproj", "{2A1C0456-88C4-4867-8AD2-53B7E591BBC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwExplorer.Scraper", "EkwExplorer.Scraper\EkwExplorer.Scraper.csproj", "{741F2EAA-B5AB-41CF-A341-288B2EBEFAC7}"
 EndProject
