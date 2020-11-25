@@ -11,9 +11,9 @@ namespace EkwExplorer.Datasource.Repositories
 {
     internal class BooksRepository : IBooksRepository
     {
-        private readonly DbAccess _db;
+        private readonly IDbAccess _db;
 
-        public BooksRepository(DbAccess access)
+        public BooksRepository(IDbAccess access)
         {
             _db = access ?? throw new ArgumentNullException(nameof(access));
         }

@@ -1,15 +1,16 @@
-﻿using System;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.SQLite;
 using System.Threading.Tasks;
+using EkwExplorer.Core;
 
 namespace EkwExplorer.Datasource
 {
-	internal class DbAccess : IDisposable, IAsyncDisposable
+	// ReSharper disable once InconsistentNaming
+	internal class SQLiteDbAccess : IDbAccess
 	{
 		public DbConnection Db { get; }
 
-		public DbAccess(string databaseFile)
+		public SQLiteDbAccess(string databaseFile)
 		{
 			Db = new SQLiteConnection("Data Source=" + databaseFile);
 		}

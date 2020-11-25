@@ -23,17 +23,17 @@ namespace EkwExplorer.Datasource
 			return File.Exists(dbFilePath);
 		}
 
-		public static async Task<DbAccess> Connect(string database)
+		public static async Task<SQLiteDbAccess> Connect(string database)
 		{
 			var dbFilePath = GetDatabasePath(database);
 
-			var connection = new DbAccess(dbFilePath);
+			var connection = new SQLiteDbAccess(dbFilePath);
 			await connection.ConnectAsync();
 
 			return connection;
 		}
 
-		public static async Task<DbAccess> Create(string database)
+		public static async Task<SQLiteDbAccess> Create(string database)
 		{
 			var connection = await Connect(database);
 
