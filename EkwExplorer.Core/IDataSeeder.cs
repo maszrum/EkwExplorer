@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using EkwExplorer.Models;
+using EkwExplorer.Core.Models;
 
 namespace EkwExplorer.Core
 {
-    internal interface IDataSeeder
+    public interface IDataSeeder
     {
         Task SeedAsync(BookNumber fromNumber, BookNumber toNumber);
     }

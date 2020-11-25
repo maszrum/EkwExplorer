@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EkwExplorer.Models
+namespace EkwExplorer.Core.Models
 {
-    internal class BookInfo
+    public class BookInfo
     {
         public BookInfo(Guid id, BookNumber number)
         {

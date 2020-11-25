@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using EkwExplorer.Models;
+using EkwExplorer.Core.Models;
 
 namespace EkwExplorer.Core
 {
-    internal interface IBooksRepository
+    public interface IBooksRepository
     {
         Task AddBookAsync(BookInfo bookInfo);
         Task UpdateBookAsync(BookInfo bookInfo);

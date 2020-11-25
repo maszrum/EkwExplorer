@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EkwExplorer.Core;
-using EkwExplorer.Models;
+using EkwExplorer.Core.Models;
 
 namespace EkwExplorer.Seeker
 {

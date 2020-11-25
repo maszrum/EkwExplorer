@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EkwExplorer.Core
 {
-    internal interface IClicker : IDisposable
+    public interface IClicker : IDisposable
     {
         void GotoHome();
         void FillTextbox(string textboxId, string text);

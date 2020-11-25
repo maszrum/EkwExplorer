@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EkwExplorer.Core;
-using EkwExplorer.Models;
+using EkwExplorer.Core.Models;
 using Serilog;
 
 namespace EkwExplorer.Seeker

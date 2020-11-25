@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EkwExplorer.Algorithms;
 using EkwExplorer.Core;
+using EkwExplorer.Core.Models;
 using EkwExplorer.Datasource;
 using EkwExplorer.Datasource.Repositories;
-using EkwExplorer.Models;
 using EkwExplorer.Seeker;
 using Serilog;
 

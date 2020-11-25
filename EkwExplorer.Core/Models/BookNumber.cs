@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace EkwExplorer.Models
+namespace EkwExplorer.Core.Models
 {
-    internal class BookNumber
+    public class BookNumber
     {
         public BookNumber(string courtCode, string number)
         {

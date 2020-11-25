@@ -1,6 +1,6 @@
 ﻿using System;
+using EkwExplorer.Core.Models;
 using EkwExplorer.Datasource.Entities;
-using EkwExplorer.Models;
 
 namespace EkwExplorer.Datasource.Mappers
 {

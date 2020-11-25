@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using EkwExplorer.Models;
+using EkwExplorer.Core.Models;
 
 namespace EkwExplorer.Algorithms
 {

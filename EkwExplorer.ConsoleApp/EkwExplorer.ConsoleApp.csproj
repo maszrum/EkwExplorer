@@ -25,6 +25,11 @@
 
   <ItemGroup>
     <Folder Include="dbo\Databases\" />
+    <Folder Include="Models" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EkwExplorer.Core\EkwExplorer.Core.csproj" />
   </ItemGroup>
 
 </Project>

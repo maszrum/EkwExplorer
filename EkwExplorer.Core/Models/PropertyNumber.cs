@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EkwExplorer.Models
+namespace EkwExplorer.Core.Models
 {
-    internal class PropertyNumber
+    public class PropertyNumber
     {
         public PropertyNumber(Guid id, string number)
         {

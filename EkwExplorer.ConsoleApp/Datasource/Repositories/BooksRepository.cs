@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using EkwExplorer.Core;
+using EkwExplorer.Core.Models;
 using EkwExplorer.Datasource.Entities;
 using EkwExplorer.Datasource.Mappers;
-using EkwExplorer.Models;
 
 namespace EkwExplorer.Datasource.Repositories
 {
