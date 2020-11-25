@@ -14,20 +14,23 @@ namespace EkwClicker
 {
     internal class Program
     {
+        private static ILogger _logger;
+        
         private static async Task Main(string[] args)
         {
-            var logger = new LoggerConfiguration()
+            _logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
                 .CreateLogger()
                 .ForContext<Program>();
             
+            ShowAvailableDatabasesInfo();
             var input = ReadProgramInput(args);
             
             var inputLines = input.ToString().Split(Environment.NewLine);
             foreach(var inputLine in inputLines)
             {
-                logger.Information(inputLine);
+                _logger.Information(inputLine);
             }
 
             await using var connection = DbAccess.Exists(input.DatabaseFile)
@@ -45,34 +48,32 @@ namespace EkwClicker
                 await seeder.SeedAsync(numberFrom, numberTo);
             }
             
-            var explorer = new BooksExplorer(logger, repository);
+            var explorer = new BooksExplorer(_logger, repository);
             
             await explorer.Open();
             await explorer.Explore();
         }
-        
-        private static ProgramInput ReadProgramInput(IReadOnlyList<string> args)
+
+        private static void ShowAvailableDatabasesInfo()
         {
-            switch (args.Count)
+            var availableDatabases = DbAccess.GetAvailableDatabases();
+            if (availableDatabases.Count == 0)
             {
-                case 1 when args[0].Contains(".json"):
-                    return new ProgramInput().ReadFromJson(args[0]);
-                case 0:
-                {
-                    var availableDatabases = DbAccess.GetAvailableDatabases();
-                    if (availableDatabases.Count == 0)
-                        Console.WriteLine("No available databases");
-                    else
-                    {
-                        Console.WriteLine("Available databases:");
-                        Console.WriteLine(string.Join(Environment.NewLine, availableDatabases));
-                    }
-                
-                    return new ProgramInput().ReadFromConsole();
-                }
-                default:
-                    return new ProgramInput().ReadFromArgs(args);
+                _logger.Information("No available databases");
+            }
+            else
+            {
+                _logger.Information("Available databases:");
+                _logger.Information(string.Join(Environment.NewLine, availableDatabases));
             }
         }
+
+        private static ProgramInput ReadProgramInput(IReadOnlyList<string> args) =>
+            args.Count switch
+            {
+                1 when args[0].Contains(".json") => new ProgramInput().ReadFromJson(args[0]),
+                0 => new ProgramInput().ReadFromConsole(),
+                _ => new ProgramInput().ReadFromArgs(args)
+            };
     }
 }
