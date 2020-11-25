@@ -1,66 +1,32 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System;
+using System.Data.Common;
+using System.Data.SQLite;
 using System.Threading.Tasks;
-using Dapper;
 
 namespace EkwClicker.Datasource
 {
-	internal static class DbAccess
+	internal class DbAccess : IDisposable, IAsyncDisposable
 	{
-		private const string DatabasesDirectory = "dbo/Databases";
-		private const string TablesSqlDirectory = "dbo/Tables";
+		public DbConnection Db { get; }
 
-		public static bool Exists(string database)
+		public DbAccess(string databaseFile)
 		{
-			var dbFilePath = GetDatabasePath(database);
-
-			if (!Directory.Exists(DatabasesDirectory))
-			{
-				Directory.CreateDirectory(DatabasesDirectory);
-			}
-
-			return File.Exists(dbFilePath);
+			Db = new SQLiteConnection("Data Source=" + databaseFile);
 		}
 
-		public static async Task<DbConnection> Connect(string database)
+		public Task ConnectAsync()
 		{
-			var dbFilePath = GetDatabasePath(database);
-
-			var connection = new DbConnection(dbFilePath);
-			await connection.ConnectAsync();
-
-			return connection;
+			return Db.OpenAsync();
 		}
 
-		public static async Task<DbConnection> Create(string database)
+		public void Dispose()
 		{
-			var connection = await Connect(database);
-
-			foreach (var tableFile in Directory.EnumerateFiles(TablesSqlDirectory, "*.sqlite"))
-			{
-				var tableSql = await File.ReadAllTextAsync(tableFile);
-				await connection.Db.ExecuteAsync(tableSql);
-			}
-
-			return connection;
+			Db.Dispose();
 		}
 
-		public static void Remove(string database)
+		public ValueTask DisposeAsync()
 		{
-			var dbFilePath = GetDatabasePath(database);
-			File.Delete(dbFilePath);
+			return Db.DisposeAsync();
 		}
-		
-		public static IReadOnlyList<string>GetAvailableDatabases()
-		{
-			var files = Directory.EnumerateFiles(DatabasesDirectory, "*", SearchOption.TopDirectoryOnly);
-			return files
-				.Select(fn => Path.GetFileName(fn))
-				.ToArray();
-		}
-
-		private static string GetDatabasePath(string database)
-			=> Path.Combine(DatabasesDirectory, database);
 	}
 }

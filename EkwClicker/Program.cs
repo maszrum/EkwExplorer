@@ -34,9 +34,9 @@ namespace EkwClicker
                 _logger.Information(inputLine);
             }
 
-            await using var connection = DbAccess.Exists(input.DatabaseFile)
-                ? await DbAccess.Connect(input.DatabaseFile)
-                : await DbAccess.Create(input.DatabaseFile);
+            await using var connection = DbManager.Exists(input.DatabaseFile)
+                ? await DbManager.Connect(input.DatabaseFile)
+                : await DbManager.Create(input.DatabaseFile);
 
             var repository = new BooksRepository(connection);
 
@@ -58,7 +58,7 @@ namespace EkwClicker
 
         private static void ShowAvailableDatabasesInfo()
         {
-            var availableDatabases = DbAccess.GetAvailableDatabases();
+            var availableDatabases = DbManager.GetAvailableDatabases();
             if (availableDatabases.Count == 0)
             {
                 _logger.Information("No available databases");

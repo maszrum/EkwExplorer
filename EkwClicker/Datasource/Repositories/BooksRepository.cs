@@ -12,11 +12,11 @@ namespace EkwClicker.Datasource.Repositories
 {
     internal class BooksRepository : IBooksRepository
     {
-        private readonly DbConnection _connection;
+        private readonly DbAccess _db;
 
-        public BooksRepository(DbConnection connection)
+        public BooksRepository(DbAccess access)
         {
-            _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+            _db = access ?? throw new ArgumentNullException(nameof(access));
         }
 
         public async Task AddBookAsync(BookInfo bookInfo)
@@ -24,7 +24,7 @@ namespace EkwClicker.Datasource.Repositories
             var query = SqlQueries.AddBook;
             var entity = new BookToEntityMapper(bookInfo).MapBook();
             
-            await _connection.Db.ExecuteAsync(query, entity);
+            await _db.Db.ExecuteAsync(query, entity);
         }
 
         public async Task UpdateBookAsync(BookInfo bookInfo)
@@ -33,7 +33,7 @@ namespace EkwClicker.Datasource.Repositories
 
             var entity = new BookToEntityMapper(bookInfo).MapBook();
 
-            var updatedRows = await _connection.Db.ExecuteAsync(query, entity);
+            var updatedRows = await _db.Db.ExecuteAsync(query, entity);
 
             if (updatedRows != 1)
             {
@@ -45,7 +45,7 @@ namespace EkwClicker.Datasource.Repositories
         public async Task<BookInfo> GetRandomNotFilledBookAsync()
         {
             var query = SqlQueries.GetRandomNotFilledBook;
-            var entity = await _connection.Db.QuerySingleOrDefaultAsync<BookEntity>(query);
+            var entity = await _db.Db.QuerySingleOrDefaultAsync<BookEntity>(query);
             
             if (entity == null)
             {
@@ -64,7 +64,7 @@ namespace EkwClicker.Datasource.Repositories
         {
             var query = SqlQueries.IsAnyNotFilled;
 
-            return _connection.Db.ExecuteScalarAsync<bool>(query);
+            return _db.Db.ExecuteScalarAsync<bool>(query);
         }
 
         public async Task AddPropertyFromBookAsync(BookInfo bookInfo)
@@ -77,9 +77,9 @@ namespace EkwClicker.Datasource.Repositories
             {
                 var query = SqlQueries.AddProperty;
 
-                var transaction = await _connection.Db.BeginTransactionAsync();
+                var transaction = await _db.Db.BeginTransactionAsync();
 
-                await _connection.Db.ExecuteAsync(query, entities);
+                await _db.Db.ExecuteAsync(query, entities);
 
                 await transaction.CommitAsync();
             }
