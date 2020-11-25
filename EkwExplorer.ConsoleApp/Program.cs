@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EkwClicker.Algorithms;
-using EkwClicker.Core;
-using EkwClicker.Datasource;
-using EkwClicker.Datasource.Repositories;
-using EkwClicker.Models;
-using EkwClicker.Seeker;
+using EkwExplorer.Algorithms;
+using EkwExplorer.Core;
+using EkwExplorer.Datasource;
+using EkwExplorer.Datasource.Repositories;
+using EkwExplorer.Models;
+using EkwExplorer.Seeker;
 using Serilog;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace EkwClicker
+namespace EkwExplorer.ConsoleApp
 {
     internal class Program
     {

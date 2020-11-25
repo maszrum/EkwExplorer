@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EkwClicker
+namespace EkwExplorer
 {
     internal class ProgramInputArgsReader
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace EkwClicker.Models
+namespace EkwExplorer.Models
 {
     internal class BookNumber
     {

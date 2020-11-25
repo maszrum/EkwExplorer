@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EkwClicker.Core;
-using EkwClicker.Models;
+using EkwExplorer.Core;
+using EkwExplorer.Models;
 
-namespace EkwClicker.Algorithms
+namespace EkwExplorer.Algorithms
 {
     internal class DatasourceSeeder : IDataSeeder
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 
-namespace EkwClicker.Datasource
+namespace EkwExplorer.Datasource
 {
 	internal static class DbManager
 	{

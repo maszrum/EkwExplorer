@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium.Chrome;
 
-namespace EkwClicker.Seeker
+namespace EkwExplorer.Seeker
 {
     internal class ChromeOptionsProvider
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using EkwClicker.Datasource.Entities;
-using EkwClicker.Models;
+using EkwExplorer.Datasource.Entities;
+using EkwExplorer.Models;
 
-namespace EkwClicker.Datasource.Mappers
+namespace EkwExplorer.Datasource.Mappers
 {
     internal class BookToModelMapper
     {

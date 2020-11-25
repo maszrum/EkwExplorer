@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using EkwClicker.Core;
-using EkwClicker.Models;
+using EkwExplorer.Core;
+using EkwExplorer.Models;
 
-namespace EkwClicker.Seeker
+namespace EkwExplorer.Seeker
 {
     internal class BookInfoSeeker
     {

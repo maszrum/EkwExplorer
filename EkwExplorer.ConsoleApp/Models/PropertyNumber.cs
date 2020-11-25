@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EkwClicker.Models
+namespace EkwExplorer.Models
 {
     internal class PropertyNumber
     {

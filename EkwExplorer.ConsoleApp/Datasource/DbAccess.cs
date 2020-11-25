@@ -3,7 +3,7 @@ using System.Data.Common;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 
-namespace EkwClicker.Datasource
+namespace EkwExplorer.Datasource
 {
 	internal class DbAccess : IDisposable, IAsyncDisposable
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EkwClicker.Datasource.Entities
+namespace EkwExplorer.Datasource.Entities
 {
     internal class BookEntity
     {

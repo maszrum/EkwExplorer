@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EkwClicker.Core;
+using EkwExplorer.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 
-namespace EkwClicker.Seeker
+namespace EkwExplorer.Seeker
 {
 	internal class SeleniumClicker : IClicker
 	{

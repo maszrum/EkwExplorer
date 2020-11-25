@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EkwClicker.Core
+namespace EkwExplorer.Core
 {
     internal interface IClicker : IDisposable
     {

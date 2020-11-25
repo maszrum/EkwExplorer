@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using EkwClicker.Models;
+using EkwExplorer.Models;
 
-namespace EkwClicker.Algorithms
+namespace EkwExplorer.Algorithms
 {
     internal class ControlDigitDecoder
     {

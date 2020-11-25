@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using EkwClicker.Datasource.Entities;
+using EkwExplorer.Datasource.Entities;
 
-namespace EkwClicker.Datasource
+namespace EkwExplorer.Datasource
 {
     internal static class SqlQueries
     {

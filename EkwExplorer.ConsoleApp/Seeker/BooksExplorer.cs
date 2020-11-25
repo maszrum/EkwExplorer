@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EkwClicker.Core;
-using EkwClicker.Models;
+using EkwExplorer.Core;
+using EkwExplorer.Models;
 using Serilog;
 
-namespace EkwClicker.Seeker
+namespace EkwExplorer.Seeker
 {
     internal class BooksExplorer
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using EkwClicker.Models;
+using EkwExplorer.Models;
 
-namespace EkwClicker.Core
+namespace EkwExplorer.Core
 {
     internal interface IDataSeeder
     {

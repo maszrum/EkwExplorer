@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EkwClicker
+namespace EkwExplorer
 {
     internal static class ProgramInputExtensions
     {

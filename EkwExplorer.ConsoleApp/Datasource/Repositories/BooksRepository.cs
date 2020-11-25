@@ -3,12 +3,12 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using EkwClicker.Core;
-using EkwClicker.Datasource.Entities;
-using EkwClicker.Datasource.Mappers;
-using EkwClicker.Models;
+using EkwExplorer.Core;
+using EkwExplorer.Datasource.Entities;
+using EkwExplorer.Datasource.Mappers;
+using EkwExplorer.Models;
 
-namespace EkwClicker.Datasource.Repositories
+namespace EkwExplorer.Datasource.Repositories
 {
     internal class BooksRepository : IBooksRepository
     {
