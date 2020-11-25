@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EkwClicker.Algorithms;
+using EkwClicker.Core;
 using EkwClicker.Datasource;
 using EkwClicker.Datasource.Repositories;
 using EkwClicker.Models;
@@ -39,20 +40,21 @@ namespace EkwClicker
 
             var repository = new BooksRepository(connection);
 
-            if (input.NumberFrom.HasValue && input.NumberTo.HasValue)
-            {
-                var numberFrom = new BookNumber(input.CourtCode, input.NumberFrom.Value.ToString("D8"));
-                var numberTo = new BookNumber(input.CourtCode, input.NumberTo.Value.ToString("D8"));
-                
-                var seeder = new DatasourceSeeder(repository);
-                await seeder.SeedAsync(numberFrom, numberTo);
-            }
+            await SeedDatabaseIfNeed(repository, input);
             
             var explorer = new BooksExplorer(_logger, repository);
             
             await explorer.Open();
             await explorer.Explore();
         }
+
+        private static ProgramInput ReadProgramInput(IReadOnlyList<string> args) =>
+            args.Count switch
+            {
+                1 when args[0].Contains(".json") => new ProgramInput().ReadFromJson(args[0]),
+                0 => new ProgramInput().ReadFromConsole(),
+                _ => new ProgramInput().ReadFromArgs(args)
+            };
 
         private static void ShowAvailableDatabasesInfo()
         {
@@ -68,12 +70,16 @@ namespace EkwClicker
             }
         }
 
-        private static ProgramInput ReadProgramInput(IReadOnlyList<string> args) =>
-            args.Count switch
+        private static async Task SeedDatabaseIfNeed(IBooksRepository repository, ProgramInput input)
+        {
+            if (input.NumberFrom.HasValue && input.NumberTo.HasValue)
             {
-                1 when args[0].Contains(".json") => new ProgramInput().ReadFromJson(args[0]),
-                0 => new ProgramInput().ReadFromConsole(),
-                _ => new ProgramInput().ReadFromArgs(args)
-            };
+                var numberFrom = new BookNumber(input.CourtCode, input.NumberFrom.Value.ToString("D8"));
+                var numberTo = new BookNumber(input.CourtCode, input.NumberTo.Value.ToString("D8"));
+
+                var seeder = new DatasourceSeeder(repository);
+                await seeder.SeedAsync(numberFrom, numberTo);
+            }
+        }
     }
 }
