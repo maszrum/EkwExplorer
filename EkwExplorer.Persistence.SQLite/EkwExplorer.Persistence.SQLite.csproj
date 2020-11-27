@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.0.78" />
+      <PackageReference Include="System.Data.SQLite" Version="1.0.113.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EkwExplorer.Core\EkwExplorer.Core.csproj" />
+      <ProjectReference Include="..\EkwExplorer.Persistence\EkwExplorer.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="dbo\Databases\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="dbo\Tables\Book.sqlite">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="dbo\Tables\PropertyNumber.sqlite">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
