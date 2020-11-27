@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="dbo\Databases\" />
-    <Folder Include="Models" />
   </ItemGroup>
 
   <ItemGroup>
