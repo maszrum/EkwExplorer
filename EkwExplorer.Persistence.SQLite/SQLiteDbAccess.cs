@@ -5,32 +5,32 @@ using EkwExplorer.Core;
 
 namespace EkwExplorer.Persistence.SQLite
 {
-	// ReSharper disable once InconsistentNaming
-	internal class SQLiteDbAccess : IDbAccess
-	{
-		public SQLiteDbAccess(string databaseFile, PersistenceConfiguration persistenceConfiguration)
-		{
-			Db = new SQLiteConnection("Data Source=" + databaseFile);
+    // ReSharper disable once InconsistentNaming
+    internal class SQLiteDbAccess : IDbAccess
+    {
+        public SQLiteDbAccess(string databaseFile, PersistenceConfiguration persistenceConfiguration)
+        {
+            Db = new SQLiteConnection("Data Source=" + databaseFile);
 
-			Queries = new SqlQueries(persistenceConfiguration);
-		}
+            Queries = new SqlQueries(persistenceConfiguration);
+        }
 
-		public DbConnection Db { get; }
-		public ISqlQueries Queries { get; }
+        public DbConnection Db { get; }
+        public ISqlQueries Queries { get; }
 
-		public Task ConnectAsync()
-		{
-			return Db.OpenAsync();
-		}
+        public Task ConnectAsync()
+        {
+            return Db.OpenAsync();
+        }
 
-		public void Dispose()
-		{
-			Db.Dispose();
-		}
+        public void Dispose()
+        {
+            Db.Dispose();
+        }
 
-		public ValueTask DisposeAsync()
-		{
-			return Db.DisposeAsync();
-		}
-	}
+        public ValueTask DisposeAsync()
+        {
+            return Db.DisposeAsync();
+        }
+    }
 }

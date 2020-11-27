@@ -2,9 +2,9 @@
 
 namespace EkwExplorer.Core
 {
-	public interface IBooksExplorer
-	{
-		Task Explore();
-		Task Open();
-	}
+    public interface IBooksExplorer
+    {
+        Task Explore();
+        Task Open();
+    }
 }
