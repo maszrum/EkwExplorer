@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EkwExplorer.Algorithms;
+using EkwExplorer.Core.Algorithms;
 using EkwExplorer.ChromeScraper;
 using EkwExplorer.Core;
 using EkwExplorer.Core.Models;

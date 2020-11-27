@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EkwExplorer.Core;
 using EkwExplorer.Core.Models;
 
-namespace EkwExplorer.Algorithms
+namespace EkwExplorer.Core.Algorithms
 {
-    internal class DatasourceSeeder : IDataSeeder
+    public class DatasourceSeeder : IDataSeeder
     {
         private readonly IBooksRepository _repository;
 

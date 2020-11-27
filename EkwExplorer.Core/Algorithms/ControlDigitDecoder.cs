@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using EkwExplorer.Core.Models;
 
-namespace EkwExplorer.Algorithms
+namespace EkwExplorer.Core.Algorithms
 {
-    internal class ControlDigitDecoder
+    public class ControlDigitDecoder
     {
         private readonly int[] _weights = new[] { 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7 };
 
