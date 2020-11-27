@@ -1,4 +1,4 @@
-﻿CREATE TABLE `Book` (
+﻿CREATE TABLE `[BookTable]` (
 	`Id`	TEXT NOT NULL UNIQUE,
 	`CourtCode`	TEXT,
 	`Number`	TEXT,
