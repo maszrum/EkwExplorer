@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EkwExplorer.ChromeScraper\EkwExplorer.ChromeScraper.csproj" />
     <ProjectReference Include="..\EkwExplorer.Core\EkwExplorer.Core.csproj" />
   </ItemGroup>
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using EkwExplorer.Core;
 using EkwExplorer.Core.Models;
 
-namespace EkwExplorer.Seeker
+namespace EkwExplorer.ChromeScraper
 {
     internal class BookInfoSeeker
     {

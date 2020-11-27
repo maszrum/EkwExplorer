@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 
-namespace EkwExplorer.Seeker
+namespace EkwExplorer.ChromeScraper
 {
 	internal class SeleniumClicker : IClicker
 	{

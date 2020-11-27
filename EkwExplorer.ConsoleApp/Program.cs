@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EkwExplorer.Algorithms;
+using EkwExplorer.ChromeScraper;
 using EkwExplorer.Core;
 using EkwExplorer.Core.Models;
 using EkwExplorer.Datasource;
 using EkwExplorer.Datasource.Repositories;
-using EkwExplorer.Seeker;
 using Serilog;
 
 // ReSharper disable ClassNeverInstantiated.Global

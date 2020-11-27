@@ -5,9 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Serilog" Version="2.10.1-dev-01256" />
       <PackageReference Include="Dapper" Version="2.0.78" />
       <PackageReference Include="Selenium.WebDriver" Version="4.0.0-alpha07" />
       <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="87.0.4280.2000" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EkwExplorer.Core\EkwExplorer.Core.csproj" />
     </ItemGroup>
 
 </Project>
