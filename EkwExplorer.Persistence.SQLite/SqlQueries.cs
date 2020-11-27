@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using EkwExplorer.Core;
-using EkwExplorer.Datasource.Entities;
+using EkwExplorer.Persistence.Entities;
 
-namespace EkwExplorer.Datasource
+namespace EkwExplorer.Persistence.SQLite
 {
     internal class SqlQueries : ISqlQueries
     {

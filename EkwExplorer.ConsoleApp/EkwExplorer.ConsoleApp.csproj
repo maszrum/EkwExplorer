@@ -15,21 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="dbo\Tables\Book.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="dbo\Tables\PropertyNumber.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="dbo\Databases\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EkwExplorer.ChromeScraper\EkwExplorer.ChromeScraper.csproj" />
     <ProjectReference Include="..\EkwExplorer.Core\EkwExplorer.Core.csproj" />
+    <ProjectReference Include="..\EkwExplorer.Persistence.SQLite\EkwExplorer.Persistence.SQLite.csproj" />
   </ItemGroup>
 
 </Project>

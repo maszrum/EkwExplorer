@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using EkwExplorer.Core.Models;
-using EkwExplorer.Datasource.Entities;
+using EkwExplorer.Persistence.Entities;
 
-namespace EkwExplorer.Datasource.Mappers
+namespace EkwExplorer.Persistence.Mappers
 {
     internal class BookToEntityMapper
     {

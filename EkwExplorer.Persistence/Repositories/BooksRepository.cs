@@ -4,25 +4,25 @@ using System.Threading.Tasks;
 using Dapper;
 using EkwExplorer.Core;
 using EkwExplorer.Core.Models;
-using EkwExplorer.Datasource.Entities;
-using EkwExplorer.Datasource.Mappers;
+using EkwExplorer.Persistence.Entities;
+using EkwExplorer.Persistence.Mappers;
 
-namespace EkwExplorer.Datasource.Repositories
+namespace EkwExplorer.Persistence.Repositories
 {
-    internal class BooksRepository : IBooksRepository
+    public class BooksRepository : IBooksRepository
     {
-        public BooksRepository(IDbAccess access, ISqlQueries queries)
+        public BooksRepository(IDbAccess access)
         {
-            _queries = queries;
             _db = access ?? throw new ArgumentNullException(nameof(access));
         }
 
         private readonly IDbAccess _db;
-        private readonly ISqlQueries _queries;
+
+        protected ISqlQueries Queries => _db.Queries;
 
         public async Task AddBookAsync(BookInfo bookInfo)
         {
-            var query = _queries.AddBook;
+            var query = Queries.AddBook;
             var entity = new BookToEntityMapper(bookInfo).MapBook();
             
             await _db.Db.ExecuteAsync(query, entity);
@@ -30,7 +30,7 @@ namespace EkwExplorer.Datasource.Repositories
 
         public async Task UpdateBookAsync(BookInfo bookInfo)
         {
-            var query = _queries.UpdateBook;
+            var query = Queries.UpdateBook;
 
             var entity = new BookToEntityMapper(bookInfo).MapBook();
 
@@ -45,7 +45,7 @@ namespace EkwExplorer.Datasource.Repositories
 
         public async Task<BookInfo> GetRandomNotFilledBookAsync()
         {
-            var query = _queries.GetRandomNotFilledBook;
+            var query = Queries.GetRandomNotFilledBook;
             var entity = await _db.Db.QuerySingleOrDefaultAsync<BookEntity>(query);
             
             if (entity == null)
@@ -63,7 +63,7 @@ namespace EkwExplorer.Datasource.Repositories
 
         public Task<bool> IsAnyNotFilled()
         {
-            var query = _queries.IsAnyNotFilled;
+            var query = Queries.IsAnyNotFilled;
 
             return _db.Db.ExecuteScalarAsync<bool>(query);
         }
@@ -76,7 +76,7 @@ namespace EkwExplorer.Datasource.Repositories
 
             if (entities.Count > 0)
             {
-                var query = _queries.AddProperty;
+                var query = Queries.AddProperty;
 
                 var transaction = await _db.Db.BeginTransactionAsync();
 

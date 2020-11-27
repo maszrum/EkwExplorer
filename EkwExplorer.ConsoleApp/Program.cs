@@ -5,8 +5,8 @@ using EkwExplorer.Algorithms;
 using EkwExplorer.ChromeScraper;
 using EkwExplorer.Core;
 using EkwExplorer.Core.Models;
-using EkwExplorer.Datasource;
-using EkwExplorer.Datasource.Repositories;
+using EkwExplorer.Persistence.Repositories;
+using EkwExplorer.Persistence.SQLite;
 using Serilog;
 
 // ReSharper disable ClassNeverInstantiated.Global
@@ -24,8 +24,15 @@ namespace EkwExplorer.ConsoleApp
                 .WriteTo.Console()
                 .CreateLogger()
                 .ForContext<Program>();
-            
-            ShowAvailableDatabasesInfo();
+
+            var dbConfiguration = new PersistenceConfiguration()
+            {
+                BookTable = "Book",
+                PropertyTable = "Property"
+            };
+            var dbManager = new DbManager(dbConfiguration);
+
+            ShowAvailableDatabasesInfo(dbManager);
             var input = ReadProgramInput(args);
             
             var inputLines = input.ToString().Split(Environment.NewLine);
@@ -34,9 +41,9 @@ namespace EkwExplorer.ConsoleApp
                 _logger.Information(inputLine);
             }
 
-            await using var connection = DbManager.Exists(input.DatabaseFile)
-                ? await DbManager.Connect(input.DatabaseFile)
-                : await DbManager.Create(input.DatabaseFile);
+            await using var connection = dbManager.Exists(input.DatabaseFile)
+                ? await dbManager.Connect(input.DatabaseFile)
+                : await dbManager.Create(input.DatabaseFile);
 
             var repository = new BooksRepository(connection);
 
@@ -56,9 +63,9 @@ namespace EkwExplorer.ConsoleApp
                 _ => new ProgramInput().ReadFromArgs(args)
             };
 
-        private static void ShowAvailableDatabasesInfo()
+        private static void ShowAvailableDatabasesInfo(DbManager dbManager)
         {
-            var availableDatabases = DbManager.GetAvailableDatabases();
+            var availableDatabases = dbManager.GetAvailableDatabases();
             if (availableDatabases.Count == 0)
             {
                 _logger.Information("No available databases");

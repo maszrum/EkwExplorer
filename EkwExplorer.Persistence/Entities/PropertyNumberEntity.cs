@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace EkwExplorer.Datasource.Entities
+﻿namespace EkwExplorer.Persistence.Entities
 {
-    internal class PropertyNumberEntity
+    public class PropertyNumberEntity
     {
         public string Id { get; set; }
         public string BookId { get; set; }
