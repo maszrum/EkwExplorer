@@ -11,16 +11,18 @@ namespace EkwExplorer.Datasource.Repositories
 {
     internal class BooksRepository : IBooksRepository
     {
-        private readonly IDbAccess _db;
-
-        public BooksRepository(IDbAccess access)
+        public BooksRepository(IDbAccess access, ISqlQueries queries)
         {
+            _queries = queries;
             _db = access ?? throw new ArgumentNullException(nameof(access));
         }
 
+        private readonly IDbAccess _db;
+        private readonly ISqlQueries _queries;
+
         public async Task AddBookAsync(BookInfo bookInfo)
         {
-            var query = SqlQueries.AddBook;
+            var query = _queries.AddBook;
             var entity = new BookToEntityMapper(bookInfo).MapBook();
             
             await _db.Db.ExecuteAsync(query, entity);
@@ -28,7 +30,7 @@ namespace EkwExplorer.Datasource.Repositories
 
         public async Task UpdateBookAsync(BookInfo bookInfo)
         {
-            var query = SqlQueries.UpdateBook;
+            var query = _queries.UpdateBook;
 
             var entity = new BookToEntityMapper(bookInfo).MapBook();
 
@@ -43,7 +45,7 @@ namespace EkwExplorer.Datasource.Repositories
 
         public async Task<BookInfo> GetRandomNotFilledBookAsync()
         {
-            var query = SqlQueries.GetRandomNotFilledBook;
+            var query = _queries.GetRandomNotFilledBook;
             var entity = await _db.Db.QuerySingleOrDefaultAsync<BookEntity>(query);
             
             if (entity == null)
@@ -61,7 +63,7 @@ namespace EkwExplorer.Datasource.Repositories
 
         public Task<bool> IsAnyNotFilled()
         {
-            var query = SqlQueries.IsAnyNotFilled;
+            var query = _queries.IsAnyNotFilled;
 
             return _db.Db.ExecuteScalarAsync<bool>(query);
         }
@@ -74,7 +76,7 @@ namespace EkwExplorer.Datasource.Repositories
 
             if (entities.Count > 0)
             {
-                var query = SqlQueries.AddProperty;
+                var query = _queries.AddProperty;
 
                 var transaction = await _db.Db.BeginTransactionAsync();
 

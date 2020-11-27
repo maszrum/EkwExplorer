@@ -1,28 +1,34 @@
 ﻿using System;
 using System.Linq;
+using EkwExplorer.Core;
 using EkwExplorer.Datasource.Entities;
 
 namespace EkwExplorer.Datasource
 {
-    internal static class SqlQueries
+    internal class SqlQueries : ISqlQueries
     {
-        private const string BookTableName = "Book";
-        private const string PropertyTableName = "PropertyNumber";
-        
-        public static string AddBook { get; } 
-            = CreateInsertQueryForEntity<BookEntity>(BookTableName);
+        public SqlQueries(PersistenceConfiguration configuration)
+        {
+            AddBook = CreateInsertQueryForEntity<BookEntity>(configuration.BookTable);
 
-        public static string IsAnyNotFilled { get; }
-            = $"SELECT EXISTS(SELECT 1 FROM `{BookTableName}` WHERE `Filled` = 0 LIMIT 1);";
+            IsAnyNotFilled = $"SELECT EXISTS(SELECT 1 FROM `{configuration.BookTable}` WHERE `Filled` = 0 LIMIT 1);";
 
-        public static string GetRandomNotFilledBook { get; } 
-            = $"SELECT * FROM `{BookTableName}` WHERE `Filled` = 0 ORDER BY RANDOM() LIMIT 1;";
+            GetRandomNotFilledBook = $"SELECT * FROM `{configuration.BookTable}` WHERE `Filled` = 0 ORDER BY RANDOM() LIMIT 1;";
 
-        public static string UpdateBook { get; }
-            = CreateUpdateQueryForEntity<BookEntity>(BookTableName);
+            UpdateBook = CreateUpdateQueryForEntity<BookEntity>(configuration.BookTable);
 
-        public static string AddProperty { get; }
-            = CreateInsertQueryForEntity<PropertyNumberEntity>(PropertyTableName);
+            AddProperty = CreateInsertQueryForEntity<PropertyNumberEntity>(configuration.PropertyTable);
+        }
+
+        public string AddBook { get; }
+
+        public string IsAnyNotFilled { get; }
+
+        public string GetRandomNotFilledBook { get; }
+
+        public string UpdateBook { get; }
+
+        public string AddProperty { get; }
 
         private static string CreateInsertQueryForEntity<T>(string tableName)
         {
@@ -34,7 +40,7 @@ namespace EkwExplorer.Datasource
 
             var fieldNames = string.Join(", ", properties.Select(p => $"`{p}`"));
             var valueNames = string.Join(", ", properties.Select(p => $"@{p}"));
-            
+
             return $"INSERT INTO `{tableName}` ({fieldNames}) VALUES ({valueNames});";
         }
 
@@ -48,7 +54,7 @@ namespace EkwExplorer.Datasource
                 throw new ArgumentException(
                     "has no property Id with return type string", nameof(T));
             }
-            
+
             var idGetter = idProperty.GetGetMethod();
 
             if (idGetter == null || idGetter.ReturnType != typeof(string))
@@ -56,7 +62,7 @@ namespace EkwExplorer.Datasource
                 throw new ArgumentException(
                     "has no getter Id with return type string", nameof(T));
             }
-            
+
             var properties = typeof(T)
                 .GetProperties()
                 .Where(p => p.CanRead)
