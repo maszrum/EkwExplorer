@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwExplorer.ConsoleApp", "EkwExplorer.ConsoleApp\EkwExplorer.ConsoleApp.csproj", "{2A1C0456-88C4-4867-8AD2-53B7E591BBC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwExplorer.Scraper", "EkwExplorer.Scraper\EkwExplorer.Scraper.csproj", "{741F2EAA-B5AB-41CF-A341-288B2EBEFAC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwExplorer.ChromeScraper", "EkwExplorer.ChromeScraper\EkwExplorer.ChromeScraper.csproj", "{741F2EAA-B5AB-41CF-A341-288B2EBEFAC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwExplorer.Core", "EkwExplorer.Core\EkwExplorer.Core.csproj", "{994FE6DD-0670-40E6-B063-3B763BF8EC2B}"
 EndProject
