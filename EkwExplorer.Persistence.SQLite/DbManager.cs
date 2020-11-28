@@ -10,6 +10,8 @@ namespace EkwExplorer.Persistence.SQLite
 {
     public class DbManager
     {
+        private const string DatabaseFileExtension = ".db";
+
         private const string DatabasesDirectory = "dbo/Databases";
         private const string TablesSqlDirectory = "dbo/Tables";
 
@@ -23,11 +25,6 @@ namespace EkwExplorer.Persistence.SQLite
         public bool Exists(string database)
         {
             var dbFilePath = GetDatabasePath(database);
-
-            if (!Directory.Exists(DatabasesDirectory))
-            {
-                Directory.CreateDirectory(DatabasesDirectory);
-            }
 
             return File.Exists(dbFilePath);
         }
@@ -86,13 +83,23 @@ namespace EkwExplorer.Persistence.SQLite
         
         public IReadOnlyList<string>GetAvailableDatabases()
         {
-            var files = Directory.EnumerateFiles(DatabasesDirectory, "*", SearchOption.TopDirectoryOnly);
+            var filePattern = string.Concat("*", DatabaseFileExtension);
+            var files = Directory.EnumerateFiles(DatabasesDirectory, filePattern, SearchOption.TopDirectoryOnly);
             return files
                 .Select(Path.GetFileName)
                 .ToArray();
         }
 
         private string GetDatabasePath(string database)
-            => Path.Combine(DatabasesDirectory, database);
+        {
+            var databaseFilename = IsFilenameWithExtension(database) 
+                ? database 
+                : string.Concat(database, DatabaseFileExtension);
+
+            return Path.Combine(DatabasesDirectory, databaseFilename);
+        }
+
+        private static bool IsFilenameWithExtension(string fileName) =>
+            fileName.EndsWith(DatabaseFileExtension);
     }
 }
