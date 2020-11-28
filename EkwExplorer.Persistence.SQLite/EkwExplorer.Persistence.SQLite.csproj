@@ -19,6 +19,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Update="dbo\Databases\info.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Update="dbo\Tables\Book.sqlite">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
