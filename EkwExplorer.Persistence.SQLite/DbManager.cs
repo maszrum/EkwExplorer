@@ -62,16 +62,15 @@ namespace EkwExplorer.Persistence.SQLite
 
             var properties = typeof(PersistenceConfiguration)
                 .GetProperties()
-                .Select(p => (PropertyInfo: p, GetMethod: p.GetGetMethod()))
-                .Where(p => p.PropertyInfo.PropertyType == typeof(string) && p.GetMethod != null)
+                .Where(pi => pi.PropertyType == typeof(string) && pi.GetGetMethod() != null)
                 .ToArray();
 
-            foreach (var p in properties)
+            foreach (var pi in properties)
             {
-                var key = $"[{p.PropertyInfo.Name}]";
+                var key = $"[{pi.Name}]";
                 if (fileContent.Contains(key, StringComparison.Ordinal))
                 {
-                    var value = (string)p.PropertyInfo.GetValue(_persistenceConfiguration);
+                    var value = (string)pi.GetValue(_persistenceConfiguration);
                     fileContent = fileContent.Replace(key, value);
                 }
             }
