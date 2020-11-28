@@ -10,15 +10,16 @@ namespace EkwExplorer.Persistence.SQLite
 {
     public class DbManager
     {
-        private const string DatabaseFileExtension = ".db";
-
-        private const string DatabasesDirectory = "dbo/Databases";
-        private const string TablesSqlDirectory = "dbo/Tables";
-
         public DbManager(PersistenceConfiguration persistenceConfiguration)
         {
             _persistenceConfiguration = persistenceConfiguration;
         }
+
+        public string DatabaseFileExtension { get; set; } = ".db";
+
+        public string DatabasesDirectory { get; set; } = "dbo/Databases";
+
+        public string TablesSqlDirectory { get; set; } = "dbo/Tables";
 
         private readonly PersistenceConfiguration _persistenceConfiguration;
 
@@ -53,6 +54,21 @@ namespace EkwExplorer.Persistence.SQLite
             return connection;
         }
 
+        public void Remove(string database)
+        {
+            var dbFilePath = GetDatabasePath(database);
+            File.Delete(dbFilePath);
+        }
+
+        public IReadOnlyList<string> GetAvailableDatabases()
+        {
+            var filePattern = string.Concat("*", DatabaseFileExtension);
+            var files = Directory.EnumerateFiles(DatabasesDirectory, filePattern, SearchOption.TopDirectoryOnly);
+            return files
+                .Select(Path.GetFileName)
+                .ToArray();
+        }
+
         private async Task<string> PrepareSeedSqlFromFile(string tableFile)
         {
             var fileContent = await File.ReadAllTextAsync(tableFile);
@@ -75,21 +91,6 @@ namespace EkwExplorer.Persistence.SQLite
             return fileContent;
         }
 
-        public void Remove(string database)
-        {
-            var dbFilePath = GetDatabasePath(database);
-            File.Delete(dbFilePath);
-        }
-        
-        public IReadOnlyList<string>GetAvailableDatabases()
-        {
-            var filePattern = string.Concat("*", DatabaseFileExtension);
-            var files = Directory.EnumerateFiles(DatabasesDirectory, filePattern, SearchOption.TopDirectoryOnly);
-            return files
-                .Select(Path.GetFileName)
-                .ToArray();
-        }
-
         private string GetDatabasePath(string database)
         {
             var databaseFilename = IsFilenameWithExtension(database) 
@@ -99,7 +100,7 @@ namespace EkwExplorer.Persistence.SQLite
             return Path.Combine(DatabasesDirectory, databaseFilename);
         }
 
-        private static bool IsFilenameWithExtension(string fileName) =>
+        private bool IsFilenameWithExtension(string fileName) =>
             fileName.EndsWith(DatabaseFileExtension);
     }
 }
