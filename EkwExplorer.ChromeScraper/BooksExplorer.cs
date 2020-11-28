@@ -37,7 +37,8 @@ namespace EkwExplorer.ChromeScraper
 
                 try
                 {
-                    await ExploringStep();
+                    await ExploringStep(cancellationToken);
+
                     downloadedBooks++;
                     captchaErrors = 0;
                 }
@@ -70,13 +71,13 @@ namespace EkwExplorer.ChromeScraper
             }
         }
 
-        private async Task ExploringStep()
+        private async Task ExploringStep(CancellationToken cancellationToken)
         {
-            await Task.Delay(GetRandomDelay());
+            await RandomDelay(cancellationToken);
 
             var randomBook = await _booksRepository.GetRandomNotFilledBookAsync();
 
-            await Task.Delay(GetRandomDelay());
+            await RandomDelay(cancellationToken);
 
             var bookExists = _seeker.ReadBookInfo(randomBook);
 
@@ -102,9 +103,21 @@ namespace EkwExplorer.ChromeScraper
             await _booksRepository.UpdateBookAsync(randomBook);
             await _booksRepository.AddPropertyFromBookAsync(randomBook);
 
-            await Task.Delay(GetRandomDelay());
+            await RandomDelay(cancellationToken);
 
             _seeker.BackToCriteria();
+        }
+
+        private async Task RandomDelay(CancellationToken cancellationToken)
+        {
+            try
+            {
+                await Task.Delay(GetRandomDelay(), cancellationToken);
+            }
+            catch (TaskCanceledException tce)
+            {
+                throw new OperationCanceledException(tce.Message, tce);
+            }
         }
 
         private int GetRandomDelay()
