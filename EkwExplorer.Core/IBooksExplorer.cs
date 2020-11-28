@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace EkwExplorer.Core
 {
     public interface IBooksExplorer
     {
-        Task Explore();
-        Task Open();
+        Task Explore(CancellationToken cancellationToken);
     }
 }

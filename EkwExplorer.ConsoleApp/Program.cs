@@ -8,6 +8,7 @@ using EkwExplorer.Core.Models;
 using EkwExplorer.Persistence.Repositories;
 using EkwExplorer.Persistence.SQLite;
 using Serilog;
+using System.Threading;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -51,8 +52,7 @@ namespace EkwExplorer.ConsoleApp
             
             var explorer = new BooksExplorer(_logger, repository);
             
-            await explorer.Open();
-            await explorer.Explore();
+            await explorer.Explore(CancellationToken.None);
         }
 
         private static ProgramInput ReadProgramInput(IReadOnlyList<string> args) =>

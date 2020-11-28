@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using EkwExplorer.Core;
 using EkwExplorer.Core.Models;
@@ -23,18 +24,17 @@ namespace EkwExplorer.ChromeScraper
             _booksRepository = booksRepository;
         }
 
-        public async Task Open()
+        public async Task Explore(CancellationToken cancellationToken)
         {
             _seeker = await OpenSeeker();
-        }
 
-        public async Task Explore()
-        {
             var captchaErrors = 0;
             var downloadedBooks = 0;
 
             while (true)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 try
                 {
                     await ExploringStep();
