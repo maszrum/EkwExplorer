@@ -21,7 +21,7 @@ namespace EkwExplorer
             {
                 sb.Append("Find codes ")
                     .Append($"from {CourtCode}/{NumberFrom.Value.ToString("D8", CultureInfo.InvariantCulture)}")
-                    .AppendLine($" to {CourtCode}/{NumberFrom.Value.ToString("D8", CultureInfo.InvariantCulture)}");
+                    .AppendLine($" to {CourtCode}/{NumberTo.Value.ToString("D8", CultureInfo.InvariantCulture)}");
             }
             else
             {

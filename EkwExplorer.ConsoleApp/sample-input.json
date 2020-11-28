@@ -1,0 +1,6 @@
+{
+  "databaseFile": "sample.db",
+  "courtCode": "NS1T",
+  "numberFrom": 1,
+  "numberTo": 100
+}

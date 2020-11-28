@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using Newtonsoft.Json;
 
 namespace EkwExplorer
 {
@@ -13,8 +14,9 @@ namespace EkwExplorer
 
         public void Read(string fileName)
         {
-            _input.CourtCode = string.Empty;
-            throw new NotImplementedException();
+            var fileContents = File.ReadAllText(fileName);
+
+            JsonConvert.PopulateObject(fileContents, _input);
         }
     }
 }
