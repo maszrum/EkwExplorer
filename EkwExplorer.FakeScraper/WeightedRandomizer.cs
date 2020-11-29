@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EkwExplorer.FakeScraper
 {
@@ -10,7 +11,24 @@ namespace EkwExplorer.FakeScraper
 
         private int _weightsSum;
 
-        public WeightedRandomizer<T> AddElement(T element, int weight)
+        public int this[T element]
+        {
+            get => _elements[FindIndex(element)].Weight;
+            set
+            {
+                var index = FindIndex(element);
+                if (index == -1)
+                {
+                    Add(element, value);
+                }
+                else
+                {
+                    _elements[index] = new WeightedElement(element, value);
+                }
+            }
+        }
+
+        public WeightedRandomizer<T> Add(T element, int weight)
         {
             if (weight <= 0)
             {
@@ -26,6 +44,12 @@ namespace EkwExplorer.FakeScraper
 
         public T Next()
         {
+            if (!_elements.Any())
+            {
+                throw new InvalidOperationException(
+                    "no item has been added");
+            }
+
             var randomValue = _random.Next(_weightsSum);
 
             foreach (var element in _elements)
@@ -41,6 +65,9 @@ namespace EkwExplorer.FakeScraper
             throw new InvalidOperationException(
                 "random element was not found");
         }
+
+        private int FindIndex(T element) => 
+            _elements.FindIndex(e => EqualityComparer<T>.Default.Equals(element, e.Element));
 
         private class WeightedElement
         {
