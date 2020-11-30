@@ -15,5 +15,7 @@ namespace EkwExplorer.Core.Models
 
         public Guid Id { get; }
         public string Number { get; }
+
+        public override string ToString() => Number;
     }
 }
