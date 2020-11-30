@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace EkwExplorer
+namespace EkwExplorer.ConsoleApp
 {
     internal class ProgramInputArgsReader
     {

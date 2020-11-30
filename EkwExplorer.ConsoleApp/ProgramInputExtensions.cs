@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EkwExplorer
+namespace EkwExplorer.ConsoleApp
 {
     internal static class ProgramInputExtensions
     {

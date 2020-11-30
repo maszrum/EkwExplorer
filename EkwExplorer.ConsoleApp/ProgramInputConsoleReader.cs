@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EkwExplorer
+namespace EkwExplorer.ConsoleApp
 {
     internal class ProgramInputConsoleReader
     {

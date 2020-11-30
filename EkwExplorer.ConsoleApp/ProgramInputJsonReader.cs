@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace EkwExplorer
+namespace EkwExplorer.ConsoleApp
 {
     internal class ProgramInputJsonReader
     {

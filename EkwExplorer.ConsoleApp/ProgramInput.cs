@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace EkwExplorer
+namespace EkwExplorer.ConsoleApp
 {
     internal class ProgramInput
     {
