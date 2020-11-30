@@ -23,7 +23,9 @@ namespace EkwExplorer.FakeScraper
 
         public async Task Explore(CancellationToken cancellationToken)
         {
-            while (true)
+            var downloadedBooks = 0;
+            
+            while (!cancellationToken.IsCancellationRequested)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -34,8 +36,13 @@ namespace EkwExplorer.FakeScraper
                 await _booksRepository.UpdateBookAsync(randomBook);
                 await _booksRepository.AddPropertyFromBookAsync(randomBook);
 
+                downloadedBooks++;
+                _logger.Debug("Downloaded books: {DownloadedBooks}", downloadedBooks);
+                
                 await RandomDelay(cancellationToken);
             }
+            
+            cancellationToken.ThrowIfCancellationRequested();
         }
 
         private async Task RandomDelay(CancellationToken cancellationToken)
