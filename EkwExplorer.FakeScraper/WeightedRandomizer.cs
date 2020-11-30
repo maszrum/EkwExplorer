@@ -28,7 +28,7 @@ namespace EkwExplorer.FakeScraper
             }
         }
 
-        public WeightedRandomizer<T> Add(T element, int weight)
+        public void Add(T element, int weight)
         {
             if (weight <= 0)
             {
@@ -38,8 +38,6 @@ namespace EkwExplorer.FakeScraper
 
             _elements.Add(new WeightedElement(element, weight));
             _weightsSum += weight;
-
-            return this;
         }
 
         public T Next()
