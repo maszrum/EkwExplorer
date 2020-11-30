@@ -9,6 +9,7 @@ using EkwExplorer.Persistence.Repositories;
 using EkwExplorer.Persistence.SQLite;
 using Serilog;
 using System.Threading;
+using EkwExplorer.FakeScraper;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -49,8 +50,8 @@ namespace EkwExplorer.ConsoleApp
             var repository = new BooksRepository(connection);
 
             await SeedDatabaseIfNeed(repository, input);
-            
-            var explorer = new BooksExplorer(_logger, repository);
+
+            var explorer = CreateExplorer(input, repository);
             
             await explorer.Explore(CancellationToken.None);
         }
@@ -87,6 +88,13 @@ namespace EkwExplorer.ConsoleApp
                 var seeder = new DatasourceSeeder(repository);
                 await seeder.SeedAsync(numberFrom, numberTo);
             }
+        }
+
+        private static IBooksExplorer CreateExplorer(ProgramInput input, IBooksRepository repository)
+        {
+            return input.FakeData
+                ? (IBooksExplorer)new BooksExplorer(_logger, repository)
+                : new FakeExplorer(_logger, repository);
         }
     }
 }

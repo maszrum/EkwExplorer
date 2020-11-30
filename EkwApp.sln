@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Core", "EkwExpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Persistence.SQLite", "EkwExplorer.Persistence.SQLite\EkwExplorer.Persistence.SQLite.csproj", "{7DDF7215-2331-4251-A5FA-78ECCF82E3DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkwExplorer.Persistence", "EkwExplorer.Persistence\EkwExplorer.Persistence.csproj", "{C47FEA88-DE91-4A22-A63C-A77B8F0BF766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Persistence", "EkwExplorer.Persistence\EkwExplorer.Persistence.csproj", "{C47FEA88-DE91-4A22-A63C-A77B8F0BF766}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.FakeScraper", "EkwExplorer.FakeScraper\EkwExplorer.FakeScraper.csproj", "{84C3D58A-DC20-462D-9D49-250F944F5009}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C47FEA88-DE91-4A22-A63C-A77B8F0BF766}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C47FEA88-DE91-4A22-A63C-A77B8F0BF766}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C47FEA88-DE91-4A22-A63C-A77B8F0BF766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C3D58A-DC20-462D-9D49-250F944F5009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C3D58A-DC20-462D-9D49-250F944F5009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C3D58A-DC20-462D-9D49-250F944F5009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C3D58A-DC20-462D-9D49-250F944F5009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

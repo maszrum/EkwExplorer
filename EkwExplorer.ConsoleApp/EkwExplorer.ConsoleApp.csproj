@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EkwExplorer.ChromeScraper\EkwExplorer.ChromeScraper.csproj" />
     <ProjectReference Include="..\EkwExplorer.Core\EkwExplorer.Core.csproj" />
+    <ProjectReference Include="..\EkwExplorer.FakeScraper\EkwExplorer.FakeScraper.csproj" />
     <ProjectReference Include="..\EkwExplorer.Persistence.SQLite\EkwExplorer.Persistence.SQLite.csproj" />
   </ItemGroup>
 

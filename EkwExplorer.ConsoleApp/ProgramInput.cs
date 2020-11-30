@@ -10,6 +10,7 @@ namespace EkwExplorer
         public string CourtCode { get; set; }
         public int? NumberFrom { get; set; }
         public int? NumberTo { get; set; }
+        public bool FakeData { get; set; }
 
         public override string ToString()
         {
