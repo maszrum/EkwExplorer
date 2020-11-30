@@ -130,8 +130,8 @@ namespace EkwExplorer.FakeScraper
 
         public string GenerateMale(NameFormat nameFormat = NameFormat.NameSurname)
         {
-            string name = _maleNames.Next();
-            string surname = _surnames.Next();
+            var name = _maleNames.Next();
+            var surname = _surnames.Next();
 
             return nameFormat switch
             {
@@ -143,8 +143,8 @@ namespace EkwExplorer.FakeScraper
 
         public string GenerateFemale(NameFormat nameFormat = NameFormat.NameSurname)
         {
-            string name = _femaleNames.Next();
-            string surname = MaleSurnameToFemale(_surnames.Next());
+            var name = _femaleNames.Next();
+            var surname = MaleSurnameToFemale(_surnames.Next());
 
             return nameFormat switch
             {
