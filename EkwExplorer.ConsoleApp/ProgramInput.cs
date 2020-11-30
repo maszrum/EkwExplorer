@@ -29,7 +29,7 @@ namespace EkwExplorer
                 sb.AppendLine("Find codes defined in existing database");
             }
             
-            return sb.ToString();
+            return sb.ToString().TrimEnd();
         }
 
         public void ThrowIfInvalid()

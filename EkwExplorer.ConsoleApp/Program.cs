@@ -93,8 +93,8 @@ namespace EkwExplorer.ConsoleApp
         private static IBooksExplorer CreateExplorer(ProgramInput input, IBooksRepository repository)
         {
             return input.FakeData
-                ? (IBooksExplorer)new BooksExplorer(_logger, repository)
-                : new FakeExplorer(_logger, repository);
+                ? (IBooksExplorer)new FakeExplorer(_logger, repository)
+                : new BooksExplorer(_logger, repository);
         }
     }
 }
