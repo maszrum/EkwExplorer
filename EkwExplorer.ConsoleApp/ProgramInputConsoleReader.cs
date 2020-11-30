@@ -40,6 +40,10 @@ namespace EkwExplorer
                 }
                 _input.NumberTo = numberTo;
             }
+
+            Console.WriteLine("Use fake data? (y/n)");
+            var useFake = Console.ReadLine()?.Trim().ToLower();
+            _input.FakeData = useFake == "true" || useFake == "1" || useFake == "yes" || useFake == "y";
             
             _input.ThrowIfInvalid();
         }
