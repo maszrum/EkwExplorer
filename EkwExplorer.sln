@@ -3,17 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.ConsoleApp", "EkwExplorer.ConsoleApp\EkwExplorer.ConsoleApp.csproj", "{2A1C0456-88C4-4867-8AD2-53B7E591BBC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.ConsoleApp", "src\EkwExplorer.ConsoleApp\EkwExplorer.ConsoleApp.csproj", "{2A1C0456-88C4-4867-8AD2-53B7E591BBC3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.ChromeScraper", "EkwExplorer.ChromeScraper\EkwExplorer.ChromeScraper.csproj", "{741F2EAA-B5AB-41CF-A341-288B2EBEFAC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.ChromeScraper", "src\EkwExplorer.ChromeScraper\EkwExplorer.ChromeScraper.csproj", "{741F2EAA-B5AB-41CF-A341-288B2EBEFAC7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Core", "EkwExplorer.Core\EkwExplorer.Core.csproj", "{994FE6DD-0670-40E6-B063-3B763BF8EC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Core", "src\EkwExplorer.Core\EkwExplorer.Core.csproj", "{994FE6DD-0670-40E6-B063-3B763BF8EC2B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Persistence.SQLite", "EkwExplorer.Persistence.SQLite\EkwExplorer.Persistence.SQLite.csproj", "{7DDF7215-2331-4251-A5FA-78ECCF82E3DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Persistence.SQLite", "src\EkwExplorer.Persistence.SQLite\EkwExplorer.Persistence.SQLite.csproj", "{7DDF7215-2331-4251-A5FA-78ECCF82E3DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Persistence", "EkwExplorer.Persistence\EkwExplorer.Persistence.csproj", "{C47FEA88-DE91-4A22-A63C-A77B8F0BF766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.Persistence", "src\EkwExplorer.Persistence\EkwExplorer.Persistence.csproj", "{C47FEA88-DE91-4A22-A63C-A77B8F0BF766}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.FakeScraper", "EkwExplorer.FakeScraper\EkwExplorer.FakeScraper.csproj", "{84C3D58A-DC20-462D-9D49-250F944F5009}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkwExplorer.FakeScraper", "src\EkwExplorer.FakeScraper\EkwExplorer.FakeScraper.csproj", "{84C3D58A-DC20-462D-9D49-250F944F5009}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE6DB362-6C37-4773-9CD7-F5B6D1651208}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "etc", "etc", "{A8BFF98B-1C46-4FAA-88D2-2DE8266F1108}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,5 +61,13 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FEF53F8-C275-42A2-A2C8-30EAE499D7AD}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{741F2EAA-B5AB-41CF-A341-288B2EBEFAC7} = {AE6DB362-6C37-4773-9CD7-F5B6D1651208}
+		{2A1C0456-88C4-4867-8AD2-53B7E591BBC3} = {AE6DB362-6C37-4773-9CD7-F5B6D1651208}
+		{994FE6DD-0670-40E6-B063-3B763BF8EC2B} = {AE6DB362-6C37-4773-9CD7-F5B6D1651208}
+		{84C3D58A-DC20-462D-9D49-250F944F5009} = {AE6DB362-6C37-4773-9CD7-F5B6D1651208}
+		{C47FEA88-DE91-4A22-A63C-A77B8F0BF766} = {AE6DB362-6C37-4773-9CD7-F5B6D1651208}
+		{7DDF7215-2331-4251-A5FA-78ECCF82E3DB} = {AE6DB362-6C37-4773-9CD7-F5B6D1651208}
 	EndGlobalSection
 EndGlobal
