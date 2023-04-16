@@ -1,15 +1,10 @@
-*.swp
-*.*~
-project.lock.json
-.DS_Store
-*.pyc
-nupkg/
-
 # Visual Studio Code
 .vscode
 
 # Rider
 .idea
+riderModule.iml
+/_ReSharper.Caches/
 
 # User-specific files
 *.suo
@@ -35,3 +30,12 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+# Others
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+node_modules/

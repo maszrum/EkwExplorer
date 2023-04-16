@@ -1,14 +1,16 @@
-﻿using System.Threading.Tasks;
-using EkwExplorer.Core.Models;
+﻿using EkwExplorer.Core.Models;
 
-namespace EkwExplorer.Core
+namespace EkwExplorer.Core;
+
+public interface IBooksRepository
 {
-    public interface IBooksRepository
-    {
-        Task AddBookAsync(BookInfo bookInfo);
-        Task UpdateBookAsync(BookInfo bookInfo);
-        Task AddPropertyFromBookAsync(BookInfo bookInfo);
-        Task<bool> IsAnyNotFilled();
-        Task<BookInfo> GetRandomNotFilledBookAsync();
-    }
+    Task AddBookAsync(BookInfo bookInfo);
+
+    Task UpdateBookAsync(BookInfo bookInfo);
+
+    Task AddPropertyFromBookAsync(BookInfo bookInfo);
+
+    Task<bool> IsAnyNotFilled();
+
+    Task<BookInfo> GetRandomNotFilledBookAsync();
 }

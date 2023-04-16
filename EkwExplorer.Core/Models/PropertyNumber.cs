@@ -1,21 +1,18 @@
-﻿using System;
+﻿namespace EkwExplorer.Core.Models;
 
-namespace EkwExplorer.Core.Models
+public class PropertyNumber
 {
-    public class PropertyNumber
+    public PropertyNumber(Guid id, string number)
     {
-        public PropertyNumber(Guid id, string number)
-        {
-            if (string.IsNullOrWhiteSpace(number))
-                throw new ArgumentNullException(nameof(number));
-            
-            Id = id;
-            Number = number;
-        }
+        if (string.IsNullOrWhiteSpace(number))
+            throw new ArgumentNullException(nameof(number));
 
-        public Guid Id { get; }
-        public string Number { get; }
-
-        public override string ToString() => Number;
+        Id = id;
+        Number = number;
     }
+
+    public Guid Id { get; }
+    public string Number { get; }
+
+    public override string ToString() => Number;
 }

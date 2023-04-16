@@ -1,54 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EkwExplorer.Core.Models;
+﻿using EkwExplorer.Core.Models;
 using EkwExplorer.Persistence.Entities;
 
-namespace EkwExplorer.Persistence.Mappers
+namespace EkwExplorer.Persistence.Mappers;
+
+internal class BookToEntityMapper
 {
-    internal class BookToEntityMapper
+    private readonly BookInfo _book;
+
+    public BookToEntityMapper(BookInfo book)
     {
-        private readonly BookInfo _book;
+        _book = book ?? throw new ArgumentNullException(nameof(book));
+    }
 
-        public BookToEntityMapper(BookInfo book)
+    public BookEntity MapBook()
+    {
+        if (!_book.Number.ControlDigit.HasValue)
+            throw new ArgumentException(
+                "must be filled with value", nameof(_book.Number.ControlDigit));
+
+        var filled = !string.IsNullOrWhiteSpace(_book.BookType);
+
+        var entity = new BookEntity
         {
-            _book = book ?? throw new ArgumentNullException(nameof(book));
-        }
+            BookType = _book.BookType,
+            ClosureDate = _book.ClosureDate,
+            ControlDigit = _book.Number.ControlDigit.Value,
+            CourtCode = _book.Number.CourtCode.ToUpper(),
+            Filled = filled,
+            Id = _book.Id.ToString("N"),
+            Location = _book.Location,
+            Number = _book.Number.Number,
+            OpeningDate = _book.OpeningDate,
+            Owner = _book.Owner
+        };
 
-        public BookEntity MapBook()
-        {
-            if (!_book.Number.ControlDigit.HasValue)
-                throw new ArgumentException(
-                    "must be filled with value", nameof(_book.Number.ControlDigit));
+        return entity;
+    }
 
-            var filled = !string.IsNullOrWhiteSpace(_book.BookType);
-
-            var entity = new BookEntity
+    public IEnumerable<PropertyNumberEntity> MapPropertyNumbers()
+    {
+        return _book.PropertyNumbers.Select(property =>
+            new PropertyNumberEntity
             {
-                BookType = _book.BookType,
-                ClosureDate = _book.ClosureDate,
-                ControlDigit = _book.Number.ControlDigit.Value,
-                CourtCode = _book.Number.CourtCode.ToUpper(),
-                Filled = filled,
-                Id = _book.Id.ToString("N"),
-                Location = _book.Location,
-                Number = _book.Number.Number,
-                OpeningDate = _book.OpeningDate,
-                Owner = _book.Owner
-            };
-
-            return entity;
-        }
-
-        public IEnumerable<PropertyNumberEntity> MapPropertyNumbers()
-        {
-            return _book.PropertyNumbers.Select(property =>
-                new PropertyNumberEntity
-                {
-                    BookId = _book.Id.ToString("N"),
-                    Id = property.Id.ToString("N"),
-                    Number = property.Number
-                });
-        }
+                BookId = _book.Id.ToString("N"),
+                Id = property.Id.ToString("N"),
+                Number = property.Number
+            });
     }
 }

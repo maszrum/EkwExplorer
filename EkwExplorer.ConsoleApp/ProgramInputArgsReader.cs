@@ -1,98 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 
-namespace EkwExplorer.ConsoleApp
+namespace EkwExplorer.ConsoleApp;
+
+internal class ProgramInputArgsReader
 {
-    internal class ProgramInputArgsReader
+    private readonly ProgramInput _input;
+
+    public ProgramInputArgsReader(ProgramInput input)
     {
-        private readonly ProgramInput _input;
+        _input = input;
+    }
 
-        public ProgramInputArgsReader(ProgramInput input)
+    public void Read(IReadOnlyList<string> args)
+    {
+        ReadArgs(args, (key, value) =>
         {
-            _input = input;
-        }
+            var propertyName = CamelCaseToPascalCase(key);
+            var property = typeof(ProgramInput).GetProperty(propertyName);
 
-        public void Read(IReadOnlyList<string> args)
-        {
-            ReadArgs(args, (key, value) =>
+            if (property != null)
             {
-                var propertyName = CamelCaseToPascalCase(key);
-                var property = typeof(ProgramInput).GetProperty(propertyName);
+                var propertyType = property.PropertyType;
 
-                if (property != null)
+                if (propertyType.Name == "Nullable`1")
                 {
-                    var propertyType = property.PropertyType;
-
-                    if (propertyType.Name == "Nullable`1")
-                    {
-                        propertyType = propertyType.GenericTypeArguments[0];
-                    }
-
-                    var convertedValue = ConvertArgValue(value, propertyType);
-
-                    property.SetValue(_input, convertedValue);
+                    propertyType = propertyType.GenericTypeArguments[0];
                 }
-            });
-        }
 
-        private static void ReadArgs(IReadOnlyList<string> args, Action<string, string> onArg)
+                var convertedValue = ConvertArgValue(value, propertyType);
+
+                property.SetValue(_input, convertedValue);
+            }
+        });
+    }
+
+    private static void ReadArgs(IReadOnlyList<string> args, Action<string, string> onArg)
+    {
+        for (int i = 0; i < args.Count - 1; i++)
         {
-            for (int i = 0; i < args.Count - 1; i++)
+            var argName = args[i];
+            var argPotentialValue = args[i + 1];
+
+            if (argName.StartsWith("--") && !argPotentialValue.StartsWith("--"))
             {
-                var argName = args[i];
-                var argPotentialValue = args[i + 1];
+                argName = argName.Substring(2);
+                var argValue = argPotentialValue;
 
-                if (argName.StartsWith("--") && !argPotentialValue.StartsWith("--"))
-                {
-                    argName = argName.Substring(2);
-                    var argValue = argPotentialValue;
-
-                    onArg(argName, argValue);
-                }
+                onArg(argName, argValue);
             }
         }
+    }
 
-        private static string CamelCaseToPascalCase(string input)
-        {
-            var parts = input
-                .ToLower()
-                .Split('-')
-                .Where(part => part.Length > 0)
-                .Select(part =>
+    private static string CamelCaseToPascalCase(string input)
+    {
+        var parts = input
+            .ToLower()
+            .Split('-')
+            .Where(part => part.Length > 0)
+            .Select(part =>
+            {
+                var firstChar = part[0];
+                if (char.IsLetter(firstChar))
                 {
-                    var firstChar = part[0];
-                    if (char.IsLetter(firstChar))
-                    {
-                        return string.Concat(char.ToUpper(firstChar), part.Remove(0, 1));
-                    }
-                    return part;
-                })
-                .ToArray();
+                    return string.Concat(char.ToUpper(firstChar), part.Remove(0, 1));
+                }
+                return part;
+            })
+            .ToArray();
 
-            return string.Concat(parts);
-        }
+        return string.Concat(parts);
+    }
 
-        private static readonly IReadOnlyDictionary<Type, Func<string, object>> Converters =
-            new Dictionary<Type, Func<string, object>>()
-            {
-                [typeof(int)] = input => int.Parse(input, CultureInfo.InvariantCulture.NumberFormat),
-                [typeof(string)]  = input => input,
-                [typeof(bool)] = input => input == "1" || input.ToLower() == "true",
-                [typeof(float)] = input => float.Parse(input, CultureInfo.InvariantCulture.NumberFormat),
-                [typeof(double)] = input => double.Parse(input, CultureInfo.InvariantCulture.NumberFormat)
-            };
-
-        private static object ConvertArgValue(string input, Type toType)
+    private static readonly IReadOnlyDictionary<Type, Func<string, object>> Converters =
+        new Dictionary<Type, Func<string, object>>()
         {
-            if (!Converters.TryGetValue(toType, out var converter))
-            {
-                throw new TypeLoadException(
-                    $"cannot parse argument of type {toType.Name} in {nameof(ProgramInput)}");
-            }
+            [typeof(int)] = input => int.Parse(input, CultureInfo.InvariantCulture.NumberFormat),
+            [typeof(string)]  = input => input,
+            [typeof(bool)] = input => input == "1" || input.ToLower() == "true",
+            [typeof(float)] = input => float.Parse(input, CultureInfo.InvariantCulture.NumberFormat),
+            [typeof(double)] = input => double.Parse(input, CultureInfo.InvariantCulture.NumberFormat)
+        };
 
-            return converter(input);
+    private static object ConvertArgValue(string input, Type toType)
+    {
+        if (!Converters.TryGetValue(toType, out var converter))
+        {
+            throw new TypeLoadException(
+                $"cannot parse argument of type {toType.Name} in {nameof(ProgramInput)}");
         }
+
+        return converter(input);
     }
 }

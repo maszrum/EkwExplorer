@@ -1,22 +1,20 @@
-﻿using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace EkwExplorer.ConsoleApp
+namespace EkwExplorer.ConsoleApp;
+
+internal class ProgramInputJsonReader
 {
-    internal class ProgramInputJsonReader
+    private readonly ProgramInput _input;
+
+    public ProgramInputJsonReader(ProgramInput input)
     {
-        private readonly ProgramInput _input;
+        _input = input;
+    }
 
-        public ProgramInputJsonReader(ProgramInput input)
-        {
-            _input = input;
-        }
+    public void Read(string fileName)
+    {
+        var fileContents = File.ReadAllText(fileName);
 
-        public void Read(string fileName)
-        {
-            var fileContents = File.ReadAllText(fileName);
-
-            JsonConvert.PopulateObject(fileContents, _input);
-        }
+        JsonConvert.PopulateObject(fileContents, _input);
     }
 }

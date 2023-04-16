@@ -1,8 +1,8 @@
-﻿namespace EkwExplorer.Core
+﻿namespace EkwExplorer.Core;
+
+public class PersistenceConfiguration
 {
-    public class PersistenceConfiguration
-    {
-        public string BookTable { get; set; }
-        public string PropertyTable { get; set; }
-    }
+    public string BookTable { get; set; }
+
+    public string PropertyTable { get; set; }
 }

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Data.Common;
-using System.Threading.Tasks;
+﻿using System.Data.Common;
 
-namespace EkwExplorer.Core
+namespace EkwExplorer.Core;
+
+public interface IDbAccess : IDisposable, IAsyncDisposable
 {
-    public interface IDbAccess : IDisposable, IAsyncDisposable
-    {
-        DbConnection Db { get; }
-        ISqlQueries Queries { get; }
-        Task ConnectAsync();
-    }
+    DbConnection Db { get; }
+
+    ISqlQueries Queries { get; }
+
+    Task ConnectAsync();
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using EkwExplorer.Core.Models;
+﻿using EkwExplorer.Core.Models;
 
 namespace EkwExplorer.FakeScraper
 {
